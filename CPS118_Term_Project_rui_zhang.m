@@ -16,7 +16,6 @@ belowlakes = lakes(eachaverage < totalaverage);
 warmests = max(datatable{:, 3:end});
 coldests = min(datatable{:, 3:end});
 % Find warmest date
-
 Suparwmest = datatable{datatable{:,3}==warmests(1),[1 2 3]};
 Michwarmest = datatable{datatable{:,4}==warmests(2),[1 2 4]};
 HuronWarmest = datatable{datatable{:,5}==warmests(3),[1 2 5]};
@@ -32,6 +31,10 @@ Ontcoolest = datatable{datatable{:,7}==coldests(5),[1 2 7]};
 StClrcoolest = datatable{datatable{:,8}==coldests(6),[1 2 8]};
 
 %% 4: Indicate the day, lake and temperature of the warmest water temperature 
+maxall = max(datatable{:,3:end}, [], 'all');
+[maxrow maxcolumn] = find(datatable{:,3:end}==maxall);
+minall = min(datatable{:,3:end}, [], 'all');
+[minrow mincolumn] = find(datatable{:,3:end}==minall);
 
 
 %% 5:
