@@ -1,45 +1,65 @@
 % Mina Alam - 500900005
 % Rui Zhang - 500736315
 
-% Problem 1:
-% Receive user input
-v = input('Enter the grades as elements of a vector: ');
-% v = [93 77 56 62 99 41 82 77 72 68 100 47 78 80 83];
-% Get length of vector
-len = length(v);
-% Calculate mean of vector
-m = mean(v);
-% Calculate deviation of vector
-d = std(v);
-% Format output
-fprintf('There are %d grades.\n', len);
-fprintf('The average grade is %.1f.\n', m);
-fprintf('The standard deviation is %.1f.\n', d);
+%% Problem 1:
+% Initialize x axis values
+x = (0:0.1:10);
+% Calulated function
+y = x.^2.*exp(-x);
+% Save the result of calculated derivative function in a vector
+yd = 2*x.*exp(-x)-x.^2.*exp(-x);
+% Plot function and its derivative with proper line style 
+plot(x, y, "-", x, yd, "--");
+% add legend and axix labels
+legend("f(x)", "f'(x)");
+xlabel("time");
+ylabel("velocity");
 
-% Problem 2:
-h = [0:2:14];
-r = 14;
-len = 36;
-% Calculate angle of circle sector
-theta = atan(sqrt(r^2 - (r-h).^2)./(r-h))*2;
-% Calculate area of circle sector and multiply length to get volume of tank
-%pi*r^2*len/2
-volume = 1/2*(theta-sin(theta))*r^2*len;
-inch_galon = 0.004329;
-% Convert inch^3 to gallon
-volume = round(volume*inch_galon, 1);
-table = [['hight(inch)' string(h)]' ['volume(gallon)' string(volume)]'];
-% Display table
-disp(table)
 
-% Problem 3:
-% Assign linear equation coefficients
-A = [1 2 10 1 1;
-    2 3 11 0 1;
-    1 4 10 1 0;
-    1 3 10 2 0];
-b = [5;12;11;8];
-% Solve linear score equation A*x = b
-x = linsolve(A, b)
+%% Problem 2:
+% Initialize independant variable values
+x = (-1:0.1:1);
+% Calculated functions in two variables
+yplus = (x.^2).^(1/3) + sqrt(1-x.^2);
+yminus = (x.^2).^(1/3) - sqrt(1-x.^2);
+% plot whole function
+plot(x, yplus, x, yminus);
+% Define x and y view limit
+xlim([-1.5, 1.5]);
+ylim([-1.5, 2]);
+% Add text on plot
+text(-0.3, 0.5, 'Stay safe!', 'FontSize', 14);
+
+
+%% Problem 3:
+% Initialize theta
+t = linspace(0,5*pi,200);
+% calculate polar axis
+rplus=sqrt(t);
+rminus=-sqrt(t);
+% plot polar
+polarplot(t, rplus, t, rminus);
+
+
+
+%% Problem 4:
+% Set constant value
+M = 0.032;
+R = 8.31;
+% Initialize x, y values
+x = (0:1000);
+y = (70:320);
+% Generate mesh values
+[v, T] = meshgrid(x, y);
+% Calculate probability distribution by temperature and speed
+Pv = 4*pi*(((M./(2*pi*R*T)).^3).^(1/2)).*v.^2.*exp(-M.*v.^2./(2*R*T));
+% Draw distribution surface
+surf(v, T, Pv);
+% Add title and axix labels
+title('Distribution of molecules of a gas');
+xlabel('speed(m/s)');
+ylabel('temerature(kelvins)')
+shading interp;
+
 
 

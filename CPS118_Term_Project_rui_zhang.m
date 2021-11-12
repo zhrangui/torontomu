@@ -30,15 +30,52 @@ Eriecoolest = datatable{datatable{:,6}==coldests(4),[1 2 6]};
 Ontcoolest = datatable{datatable{:,7}==coldests(5),[1 2 7]};
 StClrcoolest = datatable{datatable{:,8}==coldests(6),[1 2 8]};
 
-%% 4: Indicate the day, lake and temperature of the warmest water temperature 
+%% 4: Indicate the day, lake and temperature of the warmest water temperature and the coldest temperature
 maxall = max(datatable{:,3:end}, [], 'all');
 [maxrow maxcolumn] = find(datatable{:,3:end}==maxall);
+warmestdays = datatable{maxrow,1:2};
 minall = min(datatable{:,3:end}, [], 'all');
 [minrow mincolumn] = find(datatable{:,3:end}==minall);
-
+coolestdays = datatable{minrow,1:2};
 
 %% 5:
-%% 6:
+average = mean(datatable{:, 3:8}, 2);
+plot(datatable{:, 2}, average);
+xlabel('day');
+ylabel('temp');
+subplot(2,3,1);
+plot(datatable{:, 2}, datatable{:, 3});
+title(lakes(1));
+xlabel('day');
+ylabel('temp');
+subplot(2,3,2);
+plot(datatable{:, 2}, datatable{:, 4});
+title(lakes(2));
+xlabel('day');
+ylabel('temp');
+subplot(2,3,3);
+plot(datatable{:, 2}, datatable{:, 5});
+title(lakes(3));
+xlabel('day');
+ylabel('temp');
+subplot(2,3,4);
+plot(datatable{:, 2}, datatable{:, 6});
+title(lakes(4));
+xlabel('day');
+ylabel('temp');
+subplot(2,3,5);
+plot(datatable{:, 2}, datatable{:, 7});
+title(lakes(5));
+xlabel('day');
+ylabel('temp');
+subplot(2,3,6);
+plot(datatable{:, 2}, datatable{:, 8});
+title(lakes(6));
+xlabel('day');
+ylabel('temp');
+
+%% 6:  Make a single graph of the temperatures (x=day, y=temp) that shows all 6 lines on one graph
+plot(datatable{:, 2}, datatable{:, 8});
 %% 7:
 %% 8:
 %% 9:
