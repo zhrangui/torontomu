@@ -4,7 +4,7 @@ eachaverage = mean(datatable{:, 3:end});
 totalaverage = mean(datatable{:, 3:end}, 'all');
 
 %% 2: Indicate which lake is the coldest and which one is the warmest
-lakes = ["Sup","Mich","Huron","Erie","Ont","St.Clr"];
+lakes = ["Superior","Michigan","Huron","Erie","Ontario","St.Clair"];
 minaverage = min(eachaverage);
 maxaverage = max(eachaverage);
 minlake = lakes(eachaverage==minaverage);
@@ -122,10 +122,34 @@ plot(datatable{days, 2}, datatable{days, 3}, ...
 legend('trend');
 xlabel('day');
 ylabel('temp')
+
 %% 11:
+above20index= (datatable{:, 3:end} > 20);
+above20days=sum(above20index);
+percentagedays = round(100 * above20days ./ sum(above20days));
+lakelabels = lakes + " " + percentagedays + "%";
+pie(above20days, 1:6, lakelabels);
 
 %% 12:
+below0index= (datatable{:, 3:end} > 20);
+below0days=sum(below0index);
+below0alldays=sum(below0index, "all");
+
 %% 13:
+datatable2019 = getdata('glsea-temps2019_1024.dat.txt');
+eachaverage2019 = mean(datatable2019{:, 3:end});
+years = ["2019-2024"; "2020-2024"];
+average2019_2020 = [eachaverage2019; eachaverage];
+lakecells = num2cell(average2019_2020,1);
+Superior=average2019_2020(:,1);
+Michigan=average2019_2020(:,2);
+Huron=average2019_2020(:,3);
+Erie=average2019_2020(:,4);
+Ontario=average2019_2020(:,5);
+St.Clair=average2019_2020(:,6);
+laketable = table(years, Superior, Michigan, Huron, Erie, Ontario, St.Clair, ...
+    'VariableNames', cellstr(["Year" lakes]));
+disp(laketable);
 
 % funtion to read file data
 function data = getdata(filename)
