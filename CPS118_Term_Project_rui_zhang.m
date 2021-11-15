@@ -75,15 +75,57 @@ xlabel('day');
 ylabel('temp');
 
 %% 6:  Make a single graph of the temperatures (x=day, y=temp) that shows all 6 lines on one graph
-plot(datatable{:, 2}, datatable{:, 8});
+plot(datatable{:, 2}, datatable{:, 3}, ...
+    datatable{:, 2}, datatable{:, 4}, ...
+    datatable{:, 2}, datatable{:, 5}, ...
+    datatable{:, 2}, datatable{:, 6}, ...
+    datatable{:, 2}, datatable{:, 7}, ...
+    datatable{:, 2}, datatable{:, 8});
+legend('trend');
+xlabel('day');
+ylabel('temp');
+
 %% 7:
+summeraverage = mean(datatable{1:265, 3:end});
+[summeraveragedesced,summerindex] = sort(summeraverage,'descend');
+disp(lakes(summerindex));
+[eachaveragedesced,index] = sort(eachaverage,'descend');
+disp(lakes(index));
+
 %% 8:
+days=(172:265);
+plot(datatable{days, 2}, datatable{days, 3}, ...
+    datatable{days, 2}, datatable{days, 4}, ...
+    datatable{days, 2}, datatable{days, 5}, ...
+    datatable{days, 2}, datatable{days, 6}, ...
+    datatable{days, 2}, datatable{days, 7}, ...
+    datatable{days, 2}, datatable{days, 8});
+legend('trend');
+xlabel('day');
+ylabel('temp')
+
 %% 9:
+winteraverage = mean(datatable{[1:79,355:365] , 3:end});
+[winteraveragedesced,winterindex] = sort(winteraverage,'descend');
+disp(lakes(winterindex));
+[eachaveragedesced,index] = sort(eachaverage,'descend');
+disp(lakes(index));
+
 %% 10:
+days=[1:79 355:365];
+plot(datatable{days, 2}, datatable{days, 3}, ...
+    datatable{days, 2}, datatable{days, 4}, ...
+    datatable{days, 2}, datatable{days, 5}, ...
+    datatable{days, 2}, datatable{days, 6}, ...
+    datatable{days, 2}, datatable{days, 7}, ...
+    datatable{days, 2}, datatable{days, 8});
+legend('trend');
+xlabel('day');
+ylabel('temp')
 %% 11:
+
 %% 12:
 %% 13:
-%% 14:
 
 % funtion to read file data
 function data = getdata(filename)
