@@ -1,6 +1,7 @@
 function RH = RelHum(Tdb,Twb)
-%Relative humidity calculation
-% calculated from measured values of the dry-bulb temperature Tdb, 
+% Relative humidity calculation
+% RelHum(Tdb,Twb) is a function to calculate from measured values of
+% the dry-bulb temperature Tdb, 
 % and the wet-bulb temperature
 c2f = @(c) (c * 9/5) + 32;
 Tdbf = c2f(Tdb);

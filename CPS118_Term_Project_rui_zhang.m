@@ -1,46 +1,76 @@
+
+%% Global settting
+
+
 %% 1: Calculate the yearly average temperature
-datatable = getdata('glsea-temps2020_1024.dat.txt');
+datatable = getdata('glsea-temps2020_1024.dat');
+lakes = ["Superior","Michigan","Huron","Erie","Ontario","St.Clair"];
 eachaverage = mean(datatable{:, 3:end});
+eachaveragetable = table("lake", eachaverage(1),eachaverage(2),eachaverage(3), eachaverage(4), ...
+    eachaverage(5),eachaverage(6), 'VariableNames', cellstr(['average temperature' lakes]));
+disp(eachaveragetable);
 totalaverage = mean(datatable{:, 3:end}, 'all');
+fprintf('Total yearly average: %.4f', totalaverage);
 
 %% 2: Indicate which lake is the coldest and which one is the warmest
-lakes = ["Superior","Michigan","Huron","Erie","Ontario","St.Clair"];
-minaverage = min(eachaverage);
-maxaverage = max(eachaverage);
-minlake = lakes(eachaverage==minaverage);
-maxlake = lakes(eachaverage==maxaverage);
+[minaverage, minaverageind] = min(eachaverage);
+[maxaverage, maxaverageind] = max(eachaverage);
+fprintf('Coldest lake: %s\n', lakes(minaverageind));
+fprintf('Warmestest lake: %s\n', lakes(maxaverageind));
 abovelakes = lakes(eachaverage > totalaverage);
 belowlakes = lakes(eachaverage < totalaverage);
+fprintf('Lakes above the average:');
+fprintf(' %s', abovelakes);
+fprintf('\nLakes below the average:');
+fprintf(' %s', belowlakes);
+fprintf('\n');
 
-%% 3: Indicate the day and the temperature for the warmest water temperatures 
+%% 3: Indicate the day and the temperature for the warmest water
+% andcoldest temperatures temperatures 
 warmests = max(datatable{:, 3:end});
 coldests = min(datatable{:, 3:end});
-% Find warmest date
-Suparwmest = datatable{datatable{:,3}==warmests(1),[1 2 3]};
-Michwarmest = datatable{datatable{:,4}==warmests(2),[1 2 4]};
-HuronWarmest = datatable{datatable{:,5}==warmests(3),[1 2 5]};
-Eriewarmest = datatable{datatable{:,6}==warmests(4),[1 2 6]};
-Ontwarmest = datatable{datatable{:,7}==warmests(5),[1 2 7]};
-StClrwarmest = datatable{datatable{:,8}==warmests(6),[1 2 8]};
-% Find coolest date
-Supcoolest = datatable{datatable{:,3}==coldests(1),[1 2 3]};
-Michcoolest = datatable{datatable{:,4}==coldests(2),[1 2 4]};
-Huroncoolest = datatable{datatable{:,5}==coldests(3),[1 2 5]};
-Eriecoolest = datatable{datatable{:,6}==coldests(4),[1 2 6]};
-Ontcoolest = datatable{datatable{:,7}==coldests(5),[1 2 7]};
-StClrcoolest = datatable{datatable{:,8}==coldests(6),[1 2 8]};
+% Find warmest dates
+lakewarmests=cell(1,6);
+lakewarmests{1} = datatable{datatable{:,3}==warmests(1),[1 2]};
+lakewarmests{2} = datatable{datatable{:,4}==warmests(2),[1 2]};
+lakewarmests{3} = datatable{datatable{:,5}==warmests(3),[1 2]};
+lakewarmests{4} = datatable{datatable{:,6}==warmests(4),[1 2]};
+lakewarmests{5} = datatable{datatable{:,7}==warmests(5),[1 2]};
+lakewarmests{6} = datatable{datatable{:,8}==warmests(6),[1 2]};
+for k=1:length(lakes)
+    fprintf('The warmest water temperature of %s lake: %.2f\n', lakes(k), warmests(k));
+    disp(lakewarmests{k});
+end
+
+% Find coolest dates
+lakecoolests=cell(1,6);
+lakecoolests{1} = datatable{datatable{:,3}==coldests(1),[1 2]};
+lakecoolests{2} = datatable{datatable{:,4}==coldests(2),[1 2]};
+lakecoolests{3} = datatable{datatable{:,5}==coldests(3),[1 2]};
+lakecoolests{4} = datatable{datatable{:,6}==coldests(4),[1 2]};
+lakecoolests{5} = datatable{datatable{:,7}==coldests(5),[1 2]};
+lakecoolests{6} = datatable{datatable{:,8}==coldests(6),[1, 2]};
+for k=1:length(lakes)
+    fprintf('The coolest water temperature of %s lake: %.2f\n', lakes(k), coldests(k));
+    disp(lakecoolests{k});
+end
 
 %% 4: Indicate the day, lake and temperature of the warmest water temperature and the coldest temperature
-maxall = max(datatable{:,3:end}, [], 'all');
-[maxrow maxcolumn] = find(datatable{:,3:end}==maxall);
-warmestdays = datatable{maxrow,1:2};
-minall = min(datatable{:,3:end}, [], 'all');
-[minrow mincolumn] = find(datatable{:,3:end}==minall);
-coolestdays = datatable{minrow,1:2};
+warmestall = max(datatable{:,3:end}, [], 'all');
+[warnestrow warmestcolumn] = find(datatable{:,3:end}==warmestall);
+warmestdays = datatable{warnestrow,1:2};
+fprintf('The warmest water temperature: %.2f\n', warmestall);
+disp(warmestdays);
+coolestall = min(datatable{:,3:end}, [], 'all');
+[coolestrow coolestcolumn] = find(datatable{:,3:end}==coolestall);
+coolestdays = datatable{coolestrow,1:2};
+fprintf('The coolest water temperature: %.2f\n', coolestall);
+disp(coolestdays);
 
 %% 5:
 average = mean(datatable{:, 3:8}, 2);
 plot(datatable{:, 2}, average);
+title("Daily average temperature for 6 lakes");
 xlabel('day');
 ylabel('temp');
 subplot(2,3,1);
@@ -75,13 +105,13 @@ xlabel('day');
 ylabel('temp');
 
 %% 6:  Make a single graph of the temperatures (x=day, y=temp) that shows all 6 lines on one graph
-plot(datatable{:, 2}, datatable{:, 3}, ...
-    datatable{:, 2}, datatable{:, 4}, ...
-    datatable{:, 2}, datatable{:, 5}, ...
-    datatable{:, 2}, datatable{:, 6}, ...
-    datatable{:, 2}, datatable{:, 7}, ...
-    datatable{:, 2}, datatable{:, 8});
-legend('trend');
+plot(datatable{:, 2}, datatable{:, 3}, '--r',...
+    datatable{:, 2}, datatable{:, 4}, '-g',...
+    datatable{:, 2}, datatable{:, 5}, '+b',...
+    datatable{:, 2}, datatable{:, 6}, '.c',...
+    datatable{:, 2}, datatable{:, 7}, '-.m',...
+    datatable{:, 2}, datatable{:, 8}, ':y');
+legend(lakes);
 xlabel('day');
 ylabel('temp');
 
@@ -136,7 +166,7 @@ below0days=sum(below0index);
 below0alldays=sum(below0index, "all");
 
 %% 13:
-datatable2019 = getdata('glsea-temps2019_1024.dat.txt');
+datatable2019 = getdata('glsea-temps2019_1024.dat');
 eachaverage2019 = mean(datatable2019{:, 3:end});
 years = ["2019-2024"; "2020-2024"];
 average2019_2020 = [eachaverage2019; eachaverage];
@@ -151,12 +181,12 @@ laketable = table(years, Superior, Michigan, Huron, Erie, Ontario, St.Clair, ...
     'VariableNames', cellstr(["Year" lakes]));
 disp(laketable);
 
-% funtion to read file data
+%% subfuntion to read file data
 function data = getdata(filename)
 fid = fopen(filename) ;
 % skip 10 lines head lines
 data = textscan(fid,'%d %d %f %f %f %f %f %f','HeaderLines',10) ;
 fclose(fid);
 % Extract data into table, each culumn responds to data of each lake
-data = table(data{:}, 'VariableNames', {'year','day','Sup','Mich','Huron','Erie','Ont','St.Clr'});
+data = table(data{:}, 'VariableNames', {'Year','Day','Sup','Mich','Huron','Erie','Ont','StClr'});
 end

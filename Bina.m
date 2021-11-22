@@ -1,6 +1,6 @@
 function b = Bina(d)
-%Decimal to binary
-%   positive integer to be converted to
+% Decimal to binary
+% Bina(d) is function for positive integer to be converted to
 % a vector with 1’s and 0’s that represents the number in binary form
 b=[];
 if d < 0
