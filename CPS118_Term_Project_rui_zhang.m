@@ -1,13 +1,11 @@
 
-%% Global settting
-
-
 %% 1: Calculate the yearly average temperature
 datatable = getdata('glsea-temps2020_1024.dat');
 lakes = ["Superior","Michigan","Huron","Erie","Ontario","St.Clair"];
 eachaverage = mean(datatable{:, 3:end});
-eachaveragetable = table("lake", eachaverage(1),eachaverage(2),eachaverage(3), eachaverage(4), ...
-    eachaverage(5),eachaverage(6), 'VariableNames', cellstr(['average temperature' lakes]));
+eachaveragetable = table("average temperature", eachaverage(1),eachaverage(2), ...
+    eachaverage(3), eachaverage(4), eachaverage(5),eachaverage(6), ...
+    'VariableNames', cellstr(['lake' lakes]));
 disp(eachaveragetable);
 totalaverage = mean(datatable{:, 3:end}, 'all');
 fprintf('Total yearly average: %.4f', totalaverage);
@@ -67,7 +65,8 @@ coolestdays = datatable{coolestrow,1:2};
 fprintf('The coolest water temperature: %.2f\n', coolestall);
 disp(coolestdays);
 
-%% 5:
+%% 5: Make a graph of the temperature of each daily average (x=day, y=temp). 
+% Make one graph per lake 
 average = mean(datatable{:, 3:8}, 2);
 plot(datatable{:, 2}, average);
 title("Daily average temperature for 6 lakes");
@@ -104,7 +103,8 @@ title(lakes(6));
 xlabel('day');
 ylabel('temp');
 
-%% 6:  Make a single graph of the temperatures (x=day, y=temp) that shows all 6 lines on one graph
+%% 6:  Make a single graph of the temperatures (x=day, y=temp) 
+% that shows all 6 lines on one graph
 plot(datatable{:, 2}, datatable{:, 3}, '--r',...
     datatable{:, 2}, datatable{:, 4}, '-g',...
     datatable{:, 2}, datatable{:, 5}, '+b',...
@@ -112,60 +112,84 @@ plot(datatable{:, 2}, datatable{:, 3}, '--r',...
     datatable{:, 2}, datatable{:, 7}, '-.m',...
     datatable{:, 2}, datatable{:, 8}, ':y');
 legend(lakes);
+title('tempature trend')
 xlabel('day');
 ylabel('temp');
 
-%% 7:
+%% 7: calculate the summer average (day 172 to day 265) for all 6 lakes 
 summeraverage = mean(datatable{1:265, 3:end});
 [summeraveragedesced,summerindex] = sort(summeraverage,'descend');
+disp('summer average:');
 disp(lakes(summerindex));
-[eachaveragedesced,index] = sort(eachaverage,'descend');
-disp(lakes(index));
+[eachaveragedesced,allindex] = sort(eachaverage,'descend');
+disp('year average:');
+disp(lakes(allindex));
 
-%% 8:
-days=(172:265);
-plot(datatable{days, 2}, datatable{days, 3}, ...
-    datatable{days, 2}, datatable{days, 4}, ...
-    datatable{days, 2}, datatable{days, 5}, ...
-    datatable{days, 2}, datatable{days, 6}, ...
-    datatable{days, 2}, datatable{days, 7}, ...
-    datatable{days, 2}, datatable{days, 8});
-legend('trend');
+%% 8: calculate the summer average (day 172 to day 265) 
+% for all 6 lakes
+days=172:265;
+plot(datatable{days, 2}, datatable{days, 3},'--r', ...
+    datatable{days, 2}, datatable{days, 4}, '-g',...
+    datatable{days, 2}, datatable{days, 5}, '+b',...
+    datatable{days, 2}, datatable{days, 6}, '.c',...
+    datatable{days, 2}, datatable{days, 7}, '-.m',...
+    datatable{days, 2}, datatable{days, 8}, ':y');
+title('summary temperature trend')
+legend(lakes);
 xlabel('day');
-ylabel('temp')
+ylabel('temp');
 
-%% 9:
+%% 9: calculate the winter average (days 1 to 79 and days 355 to 365) 
+% for all 6 lakes
 winteraverage = mean(datatable{[1:79,355:365] , 3:end});
 [winteraveragedesced,winterindex] = sort(winteraverage,'descend');
 disp(lakes(winterindex));
-[eachaveragedesced,index] = sort(eachaverage,'descend');
-disp(lakes(index));
+[eachaveragedesced,allindex] = sort(eachaverage,'descend');
+disp(lakes(allindex));
 
-%% 10:
-days=[1:79 355:365];
-plot(datatable{days, 2}, datatable{days, 3}, ...
-    datatable{days, 2}, datatable{days, 4}, ...
-    datatable{days, 2}, datatable{days, 5}, ...
-    datatable{days, 2}, datatable{days, 6}, ...
-    datatable{days, 2}, datatable{days, 7}, ...
-    datatable{days, 2}, datatable{days, 8});
-legend('trend');
+%% 10: make a graph for winter days only (days 1 to 79 and days 355 to 365) 
+% with all 6 lakes on one graph
+days=1:79;
+plot(datatable{days, 2}, datatable{days, 3}, '--r', ...
+    datatable{days, 2}, datatable{days, 4}, '-g', ...
+    datatable{days, 2}, datatable{days, 5}, '+b', ...
+    datatable{days, 2}, datatable{days, 6}, '.c',...
+    datatable{days, 2}, datatable{days, 7}, '-.m', ...
+    datatable{days, 2}, datatable{days, 8}, ':y');
+hold on
+days=355:365;
+plot(datatable{days, 2}, datatable{days, 3}, '--r', ...
+    datatable{days, 2}, datatable{days, 4}, '-g', ...
+    datatable{days, 2}, datatable{days, 5}, '+b', ...
+    datatable{days, 2}, datatable{days, 6}, '.c',...
+    datatable{days, 2}, datatable{days, 7}, '-.m', ...
+    datatable{days, 2}, datatable{days, 8}, ':y');
+title('winter temperature trend')
+legend(lakes);
 xlabel('day');
 ylabel('temp')
+hold off
 
-%% 11:
+%% 11: calculate the number of days in the year of which temperature is above 20 
 above20index= (datatable{:, 3:end} > 20);
 above20days=sum(above20index);
 percentagedays = round(100 * above20days ./ sum(above20days));
 lakelabels = lakes + " " + percentagedays + "%";
 pie(above20days, 1:6, lakelabels);
 
-%% 12:
+%% 12: calculate the number of days in the year that the lake is frozen
 below0index= (datatable{:, 3:end} > 20);
 below0days=sum(below0index);
+disp(below0days);
+below0daytable = table("below 0", below0days(1),below0days(2),below0days(3), ...
+    below0days(4), below0days(5),below0days(6), ...
+    'VariableNames', cellstr(['lake' lakes]));
+disp(below0daytable);
 below0alldays=sum(below0index, "all");
+fprintf('Total days below 0 for all lakes: %d', below0alldays);
 
-%% 13:
+%% 13: make a table of the averages side by side to illustrate the 2019 
+% and 2020 yearly results
 datatable2019 = getdata('glsea-temps2019_1024.dat');
 eachaverage2019 = mean(datatable2019{:, 3:end});
 years = ["2019-2024"; "2020-2024"];
