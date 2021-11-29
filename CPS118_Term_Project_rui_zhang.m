@@ -2,7 +2,9 @@
 %% 1: Calculate the yearly average temperature
 datatable = getdata('glsea-temps2020_1024.dat');
 lakes = ["Superior","Michigan","Huron","Erie","Ontario","St.Clair"];
+% calculate average of lakes
 eachaverage = mean(datatable{:, 3:end});
+% Put average data of lakes into table columns
 eachaveragetable = table("average temperature", eachaverage(1),eachaverage(2), ...
     eachaverage(3), eachaverage(4), eachaverage(5),eachaverage(6), ...
     'VariableNames', cellstr(['lake' lakes]));
@@ -11,10 +13,12 @@ totalaverage = mean(datatable{:, 3:end}, 'all');
 fprintf('Total yearly average: %.4f', totalaverage);
 
 %% 2: Indicate which lake is the coldest and which one is the warmest
+% Search coldest and warmest temperature and their indices
 [minaverage, minaverageind] = min(eachaverage);
 [maxaverage, maxaverageind] = max(eachaverage);
 fprintf('Coldest lake: %s\n', lakes(minaverageind));
 fprintf('Warmestest lake: %s\n', lakes(maxaverageind));
+% Find temperatures above and below average
 abovelakes = lakes(eachaverage > totalaverage);
 belowlakes = lakes(eachaverage < totalaverage);
 fprintf('Lakes above the average:');
@@ -24,7 +28,7 @@ fprintf(' %s', belowlakes);
 fprintf('\n');
 
 %% 3: Indicate the day and the temperature for the warmest water
-% andcoldest temperatures temperatures 
+% and coldest temperatures temperatures 
 warmests = max(datatable{:, 3:end});
 coldests = min(datatable{:, 3:end});
 % Find warmest dates
@@ -55,18 +59,21 @@ end
 
 %% 4: Indicate the day, lake and temperature of the warmest water temperature and the coldest temperature
 warmestall = max(datatable{:,3:end}, [], 'all');
+% Find warmest temperature and index
 [warnestrow warmestcolumn] = find(datatable{:,3:end}==warmestall);
 warmestdays = datatable{warnestrow,1:2};
 fprintf('The warmest water temperature: %.2f\n', warmestall);
 disp(warmestdays);
 coolestall = min(datatable{:,3:end}, [], 'all');
+% Find coldest temperature and index
 [coolestrow coolestcolumn] = find(datatable{:,3:end}==coolestall);
 coolestdays = datatable{coolestrow,1:2};
 fprintf('The coolest water temperature: %.2f\n', coolestall);
 disp(coolestdays);
 
 %% 5: Make a graph of the temperature of each daily average (x=day, y=temp). 
-% Make one graph per lake 
+% Make one graph per lake
+% Draw daily temperature with title and axis labels
 average = mean(datatable{:, 3:8}, 2);
 plot(datatable{:, 2}, average);
 title("Daily average temperature for 6 lakes");
@@ -103,7 +110,7 @@ title(lakes(6));
 xlabel('day');
 ylabel('temp');
 
-%% 6:  Make a single graph of the temperatures (x=day, y=temp) 
+%% 6: Make a single graph of the temperatures (x=day, y=temp) 
 % that shows all 6 lines on one graph
 plot(datatable{:, 2}, datatable{:, 3}, '--r',...
     datatable{:, 2}, datatable{:, 4}, '-g',...
@@ -111,23 +118,27 @@ plot(datatable{:, 2}, datatable{:, 3}, '--r',...
     datatable{:, 2}, datatable{:, 6}, '.c',...
     datatable{:, 2}, datatable{:, 7}, '-.m',...
     datatable{:, 2}, datatable{:, 8}, ':y');
+% Add legend and title
 legend(lakes);
 title('tempature trend')
 xlabel('day');
 ylabel('temp');
 
-%% 7: calculate the summer average (day 172 to day 265) for all 6 lakes 
+%% 7: Calculate the summer average (day 172 to day 265) for all 6 lakes 
+% Sort summer average temperature
 summeraverage = mean(datatable{1:265, 3:end});
 [summeraveragedesced,summerindex] = sort(summeraverage,'descend');
 disp('summer average:');
 disp(lakes(summerindex));
+% Sort year average temperature
 [eachaveragedesced,allindex] = sort(eachaverage,'descend');
 disp('year average:');
 disp(lakes(allindex));
 
-%% 8: calculate the summer average (day 172 to day 265) 
+%% 8: Calculate the summer average (day 172 to day 265) 
 % for all 6 lakes
 days=172:265;
+% Pick summer temperature to draw with legend and title 
 plot(datatable{days, 2}, datatable{days, 3},'--r', ...
     datatable{days, 2}, datatable{days, 4}, '-g',...
     datatable{days, 2}, datatable{days, 5}, '+b',...
@@ -139,16 +150,19 @@ legend(lakes);
 xlabel('day');
 ylabel('temp');
 
-%% 9: calculate the winter average (days 1 to 79 and days 355 to 365) 
+%% 9: Calculate the winter average (days 1 to 79 and days 355 to 365) 
 % for all 6 lakes
 winteraverage = mean(datatable{[1:79,355:365] , 3:end});
+% Sort winter average temperature with index
 [winteraveragedesced,winterindex] = sort(winteraverage,'descend');
 disp(lakes(winterindex));
+% Sort year average temperature
 [eachaveragedesced,allindex] = sort(eachaverage,'descend');
 disp(lakes(allindex));
 
-%% 10: make a graph for winter days only (days 1 to 79 and days 355 to 365) 
+%% 10: Make a graph for winter days only (days 1 to 79 and days 355 to 365) 
 % with all 6 lakes on one graph
+% Select winter days
 days=1:79;
 plot(datatable{days, 2}, datatable{days, 3}, '--r', ...
     datatable{days, 2}, datatable{days, 4}, '-g', ...
@@ -170,17 +184,22 @@ xlabel('day');
 ylabel('temp')
 hold off
 
-%% 11: calculate the number of days in the year of which temperature is above 20 
+%% 11: Calculate the number of days in the year of which temperature is above 20
+% Check temperature above 20
 above20index= (datatable{:, 3:end} > 20);
 above20days=sum(above20index);
+% Calculate percentage of yearly days above 20
 percentagedays = round(100 * above20days ./ sum(above20days));
+% Set labels for each lake
 lakelabels = lakes + " " + percentagedays + "%";
 pie(above20days, 1:6, lakelabels);
 
-%% 12: calculate the number of days in the year that the lake is frozen
-below0index= (datatable{:, 3:end} > 20);
+%% 12: Calculate the number of days in the year that the lake is frozen
+% Find temperature below 0
+below0index= (datatable{:, 3:end} < 0);
 below0days=sum(below0index);
 disp(below0days);
+% Put temperature below 0 into table ahd display them
 below0daytable = table("below 0", below0days(1),below0days(2),below0days(3), ...
     below0days(4), below0days(5),below0days(6), ...
     'VariableNames', cellstr(['lake' lakes]));
@@ -188,11 +207,13 @@ disp(below0daytable);
 below0alldays=sum(below0index, "all");
 fprintf('Total days below 0 for all lakes: %d', below0alldays);
 
-%% 13: make a table of the averages side by side to illustrate the 2019 
+%% 13: Make a table of the averages side by side to illustrate the 2019 
 % and 2020 yearly results
 datatable2019 = getdata('glsea-temps2019_1024.dat');
+% Compute average temperature of five lakes in 2019
 eachaverage2019 = mean(datatable2019{:, 3:end});
-years = ["2019-2024"; "2020-2024"];
+years = ["2019"; "2020"];
+% Set data of 2019 and 2020 into columns
 average2019_2020 = [eachaverage2019; eachaverage];
 lakecells = num2cell(average2019_2020,1);
 Superior=average2019_2020(:,1);
@@ -201,6 +222,7 @@ Huron=average2019_2020(:,3);
 Erie=average2019_2020(:,4);
 Ontario=average2019_2020(:,5);
 St.Clair=average2019_2020(:,6);
+% Create table for five lakes
 laketable = table(years, Superior, Michigan, Huron, Erie, Ontario, St.Clair, ...
     'VariableNames', cellstr(["Year" lakes]));
 disp(laketable);
