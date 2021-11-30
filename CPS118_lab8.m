@@ -10,7 +10,16 @@ p = polyadd(p1,p2,'sub');
 disp(p);
 
 %% Problem 2:
-p = [2 -8 11];
+y=0:0.1:4;
+d2 = [4 -32 97 -136 80];
+fplot(@(x) sqrt(polyval(d2,x)), [0 4]);
+hold on
+p1 = [2 -8 11];
+x = polyval(p1, y);
+% Distance from point P(3, 4) to polynomial 
+d = sqrt((x-3).^2 + (y-4).^2);
+plot(y, d);
+hold off
 
 
 %% Problem 3:
