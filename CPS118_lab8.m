@@ -11,16 +11,41 @@ disp(p);
 
 %% Problem 2:
 y=0:0.1:4;
+p = [2 -8 11];
+% (a)
 d2 = [4 -32 97 -136 80];
-fplot(@(x) sqrt(polyval(d2,x)), [0 4]);
+disp(d2);
+xb=sqrt(polyval(d2,y));
+%% (b)
+plot(xb, y);
+% fplot(@(y) sqrt(polyval(d2,y)), [0 4]);
+%% (c)
+r3 = roots(d2-[0 0 0 0 9]);
+% Select real roots
+realy3=r3(imag(r3)==0);
+realx3=polyval(p,realy3);
+fprintf('x=%f, y=%f\n', realx3(1), realy3(1));
+fprintf('x=%f, y=%f\n', realx3(2), realy3(2));
+%% (d) derivative of distance polynomial
+d2d = [16 -96 194 -136];
+%  Get coordinate at minimum distance 
+mindy = roots(d2d);
+% Filter out imaginary roots
+realmindy=mindy(imag(mindy)==0);
+realmindx = polyval(p,realmindy);
+fprintf('minimum distance x=%f, minimum distance x=%f\n',realmindx, realmindy);
+%% (e)
+xc = polyval(p,y);
+plot(xc, y);
+xlim([0 10]);
 hold on
-p1 = [2 -8 11];
-x = polyval(p1, y);
-% Distance from point P(3, 4) to polynomial 
-d = sqrt((x-3).^2 + (y-4).^2);
-plot(y, d);
+pts = [[3 realx3']; [4 realy3']]';
+plot(pts(:,1), pts(:,2), 'mo');
+plot(realmindx, realmindy, 'r*');
+xlabel('x');
+ylabel('y');
+axis equal
 hold off
-
 
 %% Problem 3:
 Day=[7 21 35 49 63 77 91];
@@ -32,7 +57,7 @@ hold on
 fplot(@(x) polyval(f3, x), [7 91]);
 hold off
 %Estimate the height in day 40
-day40 = polyval(f, 40);
+day40 = polyval(f3, 40);
 fprintf('Height in day 40" %.4f\n', day40);
 %% Fit the data with linear and spline interpolations
 plot(Day, Height, 'o');
