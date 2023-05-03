@@ -19,3 +19,17 @@ def ryerson_letter_grade(n):
     else:
         adjust = ""
     return "DCB"[tens - 5] + adjust
+
+def words_with_letters(words, letters):
+    subsequent_words = []
+    for word in words:
+        index = -1
+        w = word
+        for letter in letters:
+            w = w[index+1:]
+            index = w.find(letter)
+            if index == -1:
+                break
+        else:
+            subsequent_words.append(word)
+    return subsequent_words
