@@ -33,3 +33,16 @@ def words_with_letters(words, letters):
         else:
             subsequent_words.append(word)
     return subsequent_words
+
+def taxi_zum_zum(moves):
+    direction =[(0, 1), (1, 0), (0, -1), (-1, 0)]
+    index = 0
+    x, y = 0, 0
+    for d in moves:
+        if d == 'L':
+            index = (index - 1) % 4 
+        elif d == 'R':
+            index = (index + 1) % 4 
+        elif d == 'F':
+            x, y = x + direction[index][0], y + direction[index][1]
+    return (x, y) 
