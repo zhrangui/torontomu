@@ -10,3 +10,6 @@ def test_words_with_letters():
 
 def test_taxi_zum_zum():
     assert taxi_zum_zum("RLLFLF") == (-1, 1)
+
+def test_give_change():
+    assert give_change(64, [50, 25, 10, 5, 1] ) == [50, 10, 1, 1, 1, 1]

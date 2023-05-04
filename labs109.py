@@ -21,6 +21,9 @@ def ryerson_letter_grade(n):
     return "DCB"[tens - 5] + adjust
 
 def words_with_letters(words, letters):
+    """
+    10. Subsequent words
+    """
     subsequent_words = []
     for word in words:
         index = -1
@@ -35,6 +38,9 @@ def words_with_letters(words, letters):
     return subsequent_words
 
 def taxi_zum_zum(moves):
+    """
+    11. Taxi Zum Zum
+    """
     direction =[(0, 1), (1, 0), (0, -1), (-1, 0)]
     index = 0
     x, y = 0, 0
@@ -45,4 +51,15 @@ def taxi_zum_zum(moves):
             index = (index + 1) % 4 
         elif d == 'F':
             x, y = x + direction[index][0], y + direction[index][1]
-    return (x, y) 
+    return (x, y)
+
+def give_change(amount, coins):
+    """
+    12. Exact change only
+    """
+    changes = []
+    for coin in coins:
+        while amount >= coin:
+            amount -= coin
+            changes.append(coin)
+    return changes
