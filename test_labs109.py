@@ -13,3 +13,6 @@ def test_taxi_zum_zum():
 
 def test_give_change():
     assert give_change(64, [50, 25, 10, 5, 1] ) == [50, 10, 1, 1, 1, 1]
+
+def test_safe_squares_rooks():
+    assert safe_squares_rooks(4, [(2, 3), (0, 1)]) == 4

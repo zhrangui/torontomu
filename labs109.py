@@ -63,3 +63,14 @@ def give_change(amount, coins):
             amount -= coin
             changes.append(coin)
     return changes
+
+def safe_squares_rooks(n, rooks):
+    """
+    13. Rooks on a rampage
+    """
+    row = set()
+    column = set()
+    for rook in rooks:
+        row.add(rook[0])
+        column.add(rook[1])
+    return (n-(len(row)))*(n-len(column))
