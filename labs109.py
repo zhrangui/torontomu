@@ -1,5 +1,6 @@
 # As an example, here is an implementation of
 # the first problem "Ryerson Letter Grade":
+import itertools
 
 def ryerson_letter_grade(n):
     if n < 50:
@@ -74,3 +75,20 @@ def safe_squares_rooks(n, rooks):
         row.add(rook[0])
         column.add(rook[1])
     return (n-(len(row)))*(n-len(column))
+
+def words_with_given_shape(words, shape):
+    """
+    14. Words with given shape
+    """
+    words_with_shape = []
+    for word in words:
+        if len(word)-1 == len(shape):
+            word_shape = []
+            for w in itertools.pairwise(word):
+                if w[0] == w[1]:
+                    word_shape.append(0)
+                else:
+                    word_shape.append(1 if w[0]<w[1] else -1)
+            if word_shape == shape:
+                words_with_shape.append(word)    
+    return words_with_shape

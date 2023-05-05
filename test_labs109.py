@@ -16,3 +16,6 @@ def test_give_change():
 
 def test_safe_squares_rooks():
     assert safe_squares_rooks(4, [(2, 3), (0, 1)]) == 4
+
+def test_words_with_given_shape():
+    assert words_with_given_shape(['congeed'], [1, -1, -1, -1, 0, -1]) == ['congeed']
