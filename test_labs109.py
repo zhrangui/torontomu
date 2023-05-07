@@ -33,7 +33,7 @@ def test_winning_card():
     assert winning_card([('two', 'hearts'), ('nine', 'spades'), ('two', 'clubs'), ('ace', 'spades')], 'clubs') == ('two', 'clubs')
 
 def test_knight_jump():
-    assert knight_jump((2, 1), (12, 10), (11, 12)) 
+    assert knight_jump((7, 5, 1), (15, 11, 16), (8, 12, 11)) 
 
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200

@@ -152,7 +152,8 @@ def knight_jump(knight, start, end):
     """
     17. Do you reach many, do you reach one?
     """
-    pass
+    substract = tuple(sorted([abs(x - y) for x, y in zip(start, end)], reverse=True))
+    return substract == knight
 
 def duplicate_digit_bonus(n):
     """
