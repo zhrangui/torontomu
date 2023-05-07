@@ -25,8 +25,10 @@ def is_ascending(items):
     """
     2. Ascending list
     """
-    for pairs in itertools.pairwise(items):
-        if pairs[0] >= pairs[1]:
+    for i in range(len(items)):
+        if i == 0:
+           continue
+        elif items[i-1] >= items[i]:
             return False
     return True    
 
@@ -108,11 +110,13 @@ def words_with_given_shape(words, shape):
     for word in words:
         if len(word)-1 == len(shape):
             word_shape = []
-            for w in itertools.pairwise(word):
-                if w[0] == w[1]:
+            for i in range(len(word)):
+                if i == 0:
+                    continue
+                if word[i-1] == word[i]:
                     word_shape.append(0)
                 else:
-                    word_shape.append(1 if w[0]<w[1] else -1)
+                    word_shape.append(1 if word[i-1]<word[i] else -1)
             if word_shape == shape:
                 words_with_shape.append(word)    
     return words_with_shape
@@ -143,6 +147,12 @@ def winning_card(cards, trump=None):
         elif winner[1]==card[1] and ranks[winner[0]]<ranks[card[0]]:
             winner = card
     return winner
+
+def knight_jump(knight, start, end):
+    """
+    17. Do you reach many, do you reach one?
+    """
+    pass
 
 def duplicate_digit_bonus(n):
     """

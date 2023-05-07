@@ -15,7 +15,7 @@ def test_riffle():
     assert riffle([1, 2, 3, 4, 5, 6, 7, 8]) == [1, 5, 2, 6, 3, 7, 4, 8]
 
 def test_taxi_zum_zum():
-    assert taxi_zum_zum("RLLFLF") == (-1, 1)
+    assert taxi_zum_zum("RFRL") == (1, 0)
 
 def test_give_change():
     assert give_change(64, [50, 25, 10, 5, 1] ) == [50, 10, 1, 1, 1, 1]
@@ -31,6 +31,9 @@ def test_is_left_handed():
 
 def test_winning_card():
     assert winning_card([('two', 'hearts'), ('nine', 'spades'), ('two', 'clubs'), ('ace', 'spades')], 'clubs') == ('two', 'clubs')
+
+def test_knight_jump():
+    assert knight_jump((2, 1), (12, 10), (11, 12)) 
 
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200
