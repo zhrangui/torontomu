@@ -143,3 +143,26 @@ def winning_card(cards, trump=None):
         elif winner[1]==card[1] and ranks[winner[0]]<ranks[card[0]]:
             winner = card
     return winner
+
+def duplicate_digit_bonus(n):
+    """
+    40. Dibs to dubs
+    """
+    str_n = str(n)
+    last = None
+    score = 0
+    k = 0
+    for i in range(len(str_n)):
+        if str_n[i] == last:
+            k += 1
+        else:
+            if k > 1:
+                score += 10**(k-2)
+            last = str_n[i]
+            k = 1
+
+    else:
+        if k > 1:
+            score += 2*10**(k-2)
+    return score
+

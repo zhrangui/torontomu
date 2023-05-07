@@ -31,3 +31,6 @@ def test_is_left_handed():
 
 def test_winning_card():
     assert winning_card([('two', 'hearts'), ('nine', 'spades'), ('two', 'clubs'), ('ace', 'spades')], 'clubs') == ('two', 'clubs')
+
+def test_duplicate_digit_bonus():
+    assert duplicate_digit_bonus(43333) == 200
