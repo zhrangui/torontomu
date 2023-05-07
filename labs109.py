@@ -21,6 +21,12 @@ def ryerson_letter_grade(n):
         adjust = ""
     return "DCB"[tens - 5] + adjust
 
+def is_ascending(items):
+    for pairs in itertools.pairwise(items):
+        if pairs[0] >= pairs[1]:
+            return False
+    return True    
+
 def words_with_letters(words, letters):
     """
     10. Subsequent words
@@ -92,3 +98,30 @@ def words_with_given_shape(words, shape):
             if word_shape == shape:
                 words_with_shape.append(word)    
     return words_with_shape
+
+def is_left_handed(pips):
+    """
+    15. Chirality
+    """
+    if sorted(pips) not in [[1,2,3],[1,2,4],[1,3,5],[4,5,6]]:
+        return False
+    return pips[0]<pips[1]<pips[2] or pips[2]<pips[0]<pips[1] or pips[1]<pips[2]<pips[0] 
+           
+def winning_card(cards, trump=None):
+    """
+    16. The card that wins the trick
+    """
+    suits = {'clubs': 4, 'diamonds': 3, 'hearts': 2, 'spades': 1}
+    ranks = {'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8,
+         'nine': 9, 'ten': 10, 'jack': 11, 'queen': 12, 'king': 13, 'ace': 14}
+    winner = None
+    for card in cards:
+        if winner is None: 
+            winner = card
+            if not trump:
+                trump = card[1]
+        elif card[1]==trump and (winner[1] != trump or ranks[winner[0]]<ranks[card[0]]):
+            winner = card
+        elif winner[1]==card[1] and ranks[winner[0]]<ranks[card[0]]:
+            winner = card
+    return winner
