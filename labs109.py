@@ -22,10 +22,28 @@ def ryerson_letter_grade(n):
     return "DCB"[tens - 5] + adjust
 
 def is_ascending(items):
+    """
+    2. Ascending list
+    """
     for pairs in itertools.pairwise(items):
         if pairs[0] >= pairs[1]:
             return False
     return True    
+
+def riffle(items, out=True):
+    """
+    3. Riffle shuffle kerfuffle
+    """
+    shuffle = []
+    half = len(items)//2
+    for index in range(half):
+        if out:
+            shuffle.append(items[index])
+            shuffle.append(items[half+index])
+        else:
+            shuffle.append(items[half+index])
+            shuffle.append(items[index])
+    return shuffle
 
 def words_with_letters(words, letters):
     """

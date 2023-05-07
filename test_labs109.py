@@ -11,6 +11,9 @@ def test_words_with_letters():
         words = [line.strip() for line in f.readlines()]
     assert words_with_letters(words, 'brohiic')
 
+def test_riffle():
+    assert riffle([1, 2, 3, 4, 5, 6, 7, 8]) == [1, 5, 2, 6, 3, 7, 4, 8]
+
 def test_taxi_zum_zum():
     assert taxi_zum_zum("RLLFLF") == (-1, 1)
 
