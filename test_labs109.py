@@ -35,5 +35,11 @@ def test_winning_card():
 def test_knight_jump():
     assert knight_jump((7, 5, 1), (15, 11, 16), (8, 12, 11)) 
 
+def test_seven_zero():
+    assert seven_zero(42) == 7770
+
+def test_can_balance():
+    assert can_balance([6, 1, 10, 5, 4]) == 2
+
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200

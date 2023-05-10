@@ -1,6 +1,9 @@
 # As an example, here is an implementation of
 # the first problem "Ryerson Letter Grade":
+import sys
 import itertools
+
+sys.set_int_max_str_digits(0)
 
 def ryerson_letter_grade(n):
     if n < 50:
@@ -154,6 +157,55 @@ def knight_jump(knight, start, end):
     """
     substract = tuple(sorted([abs(x - y) for x, y in zip(start, end)], reverse=True))
     return substract == knight
+
+def seven_zero(n):
+    """
+    18. Sevens rule, zeros drool
+    """
+    return
+    def generate70(d):
+        seven_zero = 0
+        k = 1
+        while k <= d:
+            seven_zero += 7*10**(d-k)
+            yield seven_zero
+            k += 1
+    
+    length = len(str(n))
+    div5_2 = n%5 == 0 or n%2==2
+
+    while length>0:
+        if div5_2:
+            seven_zeros = generate70(length)
+            for sz in seven_zeros:
+                if sz%n == 0:
+                    return sz
+        else:
+            seven_zero = int("7"*length)
+            if seven_zero % n == 0:
+                return seven_zero
+
+        length += 1
+
+def can_balance(items):
+    """
+    19. Fulcrum
+    """
+    if len(items) <= 1:
+        return 0
+    for index in range(1, len(items)):
+        left, right = 0, 0
+        for i, item in enumerate(items[:index]):
+            left+=item*(index-i)
+        for i, item in enumerate(items[index+1:]):
+            right += item*(i+1)
+        if left == right:
+            return index
+        left, right = 0, 0
+    return -1
+
+
+    
 
 def duplicate_digit_bonus(n):
     """
