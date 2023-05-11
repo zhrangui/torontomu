@@ -44,5 +44,10 @@ def test_can_balance():
 def test_josephus():
     assert josephus(4, 2) == [2, 4, 3, 1]
 
+def test_group_and_skip():
+    assert group_and_skip(13, 3, 2) == [1, 2, 1, 2]
+
+
+
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200

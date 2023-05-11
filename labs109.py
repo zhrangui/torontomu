@@ -28,10 +28,8 @@ def is_ascending(items):
     """
     2. Ascending list
     """
-    for i in range(len(items)):
-        if i == 0:
-           continue
-        elif items[i-1] >= items[i]:
+    for i in range(1, len(items)):
+        if items[i-1] >= items[i]:
             return False
     return True    
 
@@ -217,8 +215,18 @@ def josephus(n, k):
         del rest[index]
     return final
 
+def group_and_skip(n, out, ins):
+    """
+    21. All your bases are belong to us
+    """
+    number = []
+    while n >= out:
+        number.append(n%out)
+        n = ins*(n//out)
+    if n > 0:
+        number.append(n)
+    return number
 
-    
 
 def duplicate_digit_bonus(n):
     """
@@ -236,7 +244,6 @@ def duplicate_digit_bonus(n):
                 score += 10**(k-2)
             last = str_n[i]
             k = 1
-
     else:
         if k > 1:
             score += 2*10**(k-2)
