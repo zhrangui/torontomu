@@ -11,6 +11,9 @@ def test_words_with_letters():
         words = [line.strip() for line in f.readlines()]
     assert words_with_letters(words, 'brohiic')
 
+def test_domino_cycle():
+    assert domino_cycle([(3, 5), (5, 2), (2, 3)])
+
 def test_riffle():
     assert riffle([1, 2, 3, 4, 5, 6, 7, 8]) == [1, 5, 2, 6, 3, 7, 4, 8]
 
@@ -47,7 +50,8 @@ def test_josephus():
 def test_group_and_skip():
     assert group_and_skip(13, 3, 2) == [1, 2, 1, 2]
 
-
+def test_pyramid_blocks():
+    assert pyramid_blocks(2, 3, 1) == 6
 
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200

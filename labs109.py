@@ -48,6 +48,15 @@ def riffle(items, out=True):
             shuffle.append(items[index])
     return shuffle
 
+def domino_cycle(tiles):
+    """
+    6. Domino cycle
+    """
+    for i in range(len(tiles)):
+        if tiles[i-1][1] != tiles[i][0]:
+            return False
+    return True
+
 def words_with_letters(words, letters):
     """
     10. Subsequent words
@@ -226,6 +235,16 @@ def group_and_skip(n, out, ins):
     if n > 0:
         number.append(n)
     return number
+
+def pyramid_blocks(n, m, h):
+    """
+    22. Count the balls off the brass monkey
+    """
+    i = 1
+    while i < 2:
+        break
+    else:
+        print("i end")
 
 
 def duplicate_digit_bonus(n):
