@@ -204,6 +204,19 @@ def can_balance(items):
         left, right = 0, 0
     return -1
 
+def josephus(n, k):
+    """
+    20. Fail while daring greatly
+    """
+    rest = list(range(1, n+1))
+    final = []
+    index = 0
+    while rest:
+        index = (index-1 + k) % len(rest)
+        final.append(rest[index])
+        del rest[index]
+    return final
+
 
     
 

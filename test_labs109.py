@@ -41,5 +41,8 @@ def test_seven_zero():
 def test_can_balance():
     assert can_balance([6, 1, 10, 5, 4]) == 2
 
+def test_josephus():
+    assert josephus(4, 2) == [2, 4, 3, 1]
+
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200
