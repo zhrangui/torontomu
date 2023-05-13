@@ -263,6 +263,26 @@ def count_growlers(animals):
             count += 1
     return count
 
+def bulgarian_solitaire(piles, k):
+    """
+    24. Bulgarian solitair
+    """
+    newPiles = []
+    count = 0
+    while not all(n in piles for n in range(1,k+1)):
+        newPiles = []
+        for p in piles:
+            if p > 1:
+                newPiles.append(p-1)
+        newPiles.append(len(piles)) 
+        piles = newPiles
+        count += 1
+    return count
+    
+
+
+
+
 def duplicate_digit_bonus(n):
     """
     40. Dibs to dubs

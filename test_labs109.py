@@ -56,5 +56,9 @@ def test_pyramid_blocks():
 def test_count_growlers():
     assert count_growlers(['god', 'cat', 'cat', 'tac', 'tac', 'dog', 'cat', 'god']) == 2
 
+def test_bulgarian_solitaire():
+    assert bulgarian_solitaire([8, 3, 3, 1], 5) == 9
+
+
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200
