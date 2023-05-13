@@ -243,6 +243,25 @@ def pyramid_blocks(n, m, h):
     sum = h*m*n + h*(h-1)//2*(m+n) +  ((h-1) * h * (2 * (h-1) + 1)) // 6
     return sum
 
+def count_growlers(animals):
+    """
+    23. Count growlers
+    """
+    count = 0
+    for i, animal in enumerate(animals):
+        growl = 0
+        if animal in ['cat', 'dog']:
+            face = animals[:i]
+        else:
+            face = animals[i+1:]
+        for a in face:
+            if a in ['dog', 'god']:
+                growl += 1
+            else:
+                growl -= 1
+        if growl > 0:
+            count += 1
+    return count
 
 def duplicate_digit_bonus(n):
     """

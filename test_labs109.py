@@ -53,5 +53,8 @@ def test_group_and_skip():
 def test_pyramid_blocks():
     assert pyramid_blocks(2, 3, 10) == 570
 
+def test_count_growlers():
+    assert count_growlers(['god', 'cat', 'cat', 'tac', 'tac', 'dog', 'cat', 'god']) == 2
+
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200
