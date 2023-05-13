@@ -240,11 +240,8 @@ def pyramid_blocks(n, m, h):
     """
     22. Count the balls off the brass monkey
     """
-    i = 1
-    while i < 2:
-        break
-    else:
-        print("i end")
+    sum = h*m*n + h*(h-1)//2*(m+n) +  ((h-1) * h * (2 * (h-1) + 1)) // 6
+    return sum
 
 
 def duplicate_digit_bonus(n):

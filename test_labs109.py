@@ -51,7 +51,7 @@ def test_group_and_skip():
     assert group_and_skip(13, 3, 2) == [1, 2, 1, 2]
 
 def test_pyramid_blocks():
-    assert pyramid_blocks(2, 3, 1) == 6
+    assert pyramid_blocks(2, 3, 10) == 570
 
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200
