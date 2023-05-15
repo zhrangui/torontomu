@@ -267,21 +267,76 @@ def bulgarian_solitaire(piles, k):
     """
     24. Bulgarian solitair
     """
-    newPiles = []
+    new_piles = []
     count = 0
     while not all(n in piles for n in range(1,k+1)):
-        newPiles = []
+        new_piles = []
         for p in piles:
             if p > 1:
-                newPiles.append(p-1)
-        newPiles.append(len(piles)) 
-        piles = newPiles
+                new_piles.append(p-1)
+        new_piles.append(len(piles)) 
+        piles = new_piles
         count += 1
     return count
     
+def scylla_or_charybdis(moves, n):
+    """
+    25. Scylla or Charybdis?
+    """
+    ns = []
+    k = 0
+    for i, move in enumerate(moves): 
+        if move == "+":
+            k += 1
+        else:
+            k -= 1
+        if abs(k) == n - 1:
+            ns.append(i)
+    return ns
+    
+def arithmetic_progression(items):
+    """
+    26. Longest arithmetic progression
+    """
+    counts = {}
+    starts = {}
+    for i in range(1, len(items)):
+        stride = items[i] - items[i-1]
+        if not stride in counts:
+            starts[stride] = items[i-1]
+        counts[stride] = counts.get(stride, 0) + 1
+    max_key = max(counts, key=lambda k: counts[k])
+    return [starts[max_key], max_key, counts[max_key]]
 
+def tukeys_ninthers(items):
+    """
+    27. Best one out of three
+    """
+    while len(items) > 1:
+        medians = []
+        for i in range(len(items)//3):
+            index = i*3
+            medians.append(sorted(items[index:index+3])[1])
+        items = medians
 
+    return items[0]
 
+def collect_numbers(perm):
+    """
+    28. Collecting numbers
+    """
+
+def verify_betweenness(perm, constraints):
+    """
+    29. Between the soft and the NP–hard place
+    """
+    pass
+
+def count_troikas(items):
+    """
+    30. Count Troikanoff, I presume
+    """
+    pass
 
 def duplicate_digit_bonus(n):
     """

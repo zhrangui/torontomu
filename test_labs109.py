@@ -59,6 +59,23 @@ def test_count_growlers():
 def test_bulgarian_solitaire():
     assert bulgarian_solitaire([8, 3, 3, 1], 5) == 9
 
+def test_scylla_or_charybdis():
+    assert scylla_or_charybdis('-++--++-++++', 2) == 3
+
+def test_arithmetic_progression():
+    assert arithmetic_progression([2, 4, 6, 7, 8, 12, 17]) == (2, 2, 4)
+
+def test_tukeys_ninthers():
+    assert tukeys_ninthers([42, 7, 15]) == 15
+
+def test_collect_numbers():
+    assert collect_numbers([0, 1, 2, 3, 4, 5]) == 1
+
+def test_verify_betweenness():
+    assert verify_betweenness(p[5, 2, 0, 3, 1, 4],[(4, 3, 5), (2, 0, 4), (2, 1, 4), (1, 2, 5), (4, 0, 5)])
+
+def test_count_troikas():
+    assert  count_troikas([-8, -8, -8, -18, -8, 13, -8]) == 3
 
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200
