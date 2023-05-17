@@ -1,7 +1,7 @@
 # As an example, here is an implementation of
 # the first problem "Ryerson Letter Grade":
 import sys
-import itertools
+from itertools import combinations
 
 sys.set_int_max_str_digits(0)
 
@@ -328,7 +328,7 @@ def collect_numbers(perm):
 
 def verify_betweenness(perm, constraints):
     """
-    29. Between the soft and the NP–hard place
+    29. Between the soft and the NP-hard place
     """
     pass
 
@@ -336,8 +336,22 @@ def count_troikas(items):
     """
     30. Count Troikanoff, I presume
     """
-    pass
-
+    same_items = {}
+    for i, item in enumerate(items):
+        if item in same_items:
+            same_items[item].append(i)
+        else:
+            same_items[item] = [i]
+    count = 0
+    for item in same_items:
+        if len(same_items[item]) > 2:
+           all = combinations(same_items[item], 3)
+           for cb in all:
+                st = sorted(cb)
+                if st[1] - st[0] == st[2]-st[1]:
+                    count += 1
+    return count
+    
 def duplicate_digit_bonus(n):
     """
     40. Dibs to dubs
