@@ -77,5 +77,8 @@ def test_verify_betweenness():
 def test_count_troikas():
     assert  count_troikas([-8, -8, -8, -18, -8, 13, -8]) == 3
 
+def test_crag_score():
+    assert crag_score([1, 2, 3]) == 20
+
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200

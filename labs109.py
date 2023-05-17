@@ -351,7 +351,26 @@ def count_troikas(items):
                 if st[1] - st[0] == st[2]-st[1]:
                     count += 1
     return count
+
+def crag_score(dice):
+    """
+    31. Crack the crag
+    """
+    dice = sorted(dice)
+    if sum(dice) == 13:
+        if dice[0] == dice[1] or dice[1] == dice[2]:
+            return 50
+        else:
+            return 26
+    elif dice[0] == dice[1] == dice[2]:
+        return 25
+    elif dice==[1, 2, 3] or dice==[4, 5, 6] or dice==[1, 3, 5] or dice==[2, 4, 6]:
+        return 20
     
+    return max(dice.count(6)*6, dice.count(5)*5,dice.count(4)*4,
+        dice.count(3)*3, dice.count(2)*2, dice.count(1))
+
+
 def duplicate_digit_bonus(n):
     """
     40. Dibs to dubs
