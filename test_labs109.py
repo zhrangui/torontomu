@@ -83,5 +83,8 @@ def test_crag_score():
 def test_three_summers():
     assert not three_summers([2, 3, 5, 10], 14)
 
+def test_sum_of_two_squares():
+    assert sum_of_two_squares(50) == (7, 1)
+
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200

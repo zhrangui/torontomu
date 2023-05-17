@@ -1,6 +1,6 @@
 # As an example, here is an implementation of
 # the first problem "Ryerson Letter Grade":
-import sys
+import sys, math
 from itertools import combinations
 
 sys.set_int_max_str_digits(0)
@@ -379,17 +379,33 @@ def three_summers(items, goal):
         while i < j:
             x = items[i] + items[j]
             if x == goal:
-                return True  # Okay, that's a solution.
+                return True
             elif x < goal:
-                i += 1  # Smallest element can't be part of solution.
+                i += 1
             else:
-                j -= 1  # Largest element can't be part of solution.
+                j -= 1
         return False
     
     for i in range(1, len(items)):
         if two_summers(items[i:], goal-items[i-1]):
             return True
     return False
+
+def sum_of_two_squares(n):
+    """
+    33. Sum of two squares
+    """
+    i = 1
+    j = int(math.sqrt(n))
+    while i <= j:
+        x = i**2 + j**2
+        if x == n:
+            return (j, i)
+        elif x < n:
+            i += 1
+        else:
+            j -= 1
+    return None
 
 def duplicate_digit_bonus(n):
     """
