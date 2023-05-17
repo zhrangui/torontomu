@@ -86,5 +86,8 @@ def test_three_summers():
 def test_sum_of_two_squares():
     assert sum_of_two_squares(50) == (7, 1)
 
+def test_count_carries():
+    assert count_carries(99999, 1) == 5
+
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200

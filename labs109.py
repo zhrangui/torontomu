@@ -1,9 +1,11 @@
 # As an example, here is an implementation of
 # the first problem "Ryerson Letter Grade":
-import sys, math
+import sys
+import math
 from itertools import combinations
 
 sys.set_int_max_str_digits(0)
+
 
 def ryerson_letter_grade(n):
     if n < 50:
@@ -24,6 +26,7 @@ def ryerson_letter_grade(n):
         adjust = ""
     return "DCB"[tens - 5] + adjust
 
+
 def is_ascending(items):
     """
     2. Ascending list
@@ -31,7 +34,8 @@ def is_ascending(items):
     for i in range(1, len(items)):
         if items[i-1] >= items[i]:
             return False
-    return True    
+    return True
+
 
 def riffle(items, out=True):
     """
@@ -48,6 +52,7 @@ def riffle(items, out=True):
             shuffle.append(items[index])
     return shuffle
 
+
 def domino_cycle(tiles):
     """
     6. Domino cycle
@@ -56,6 +61,7 @@ def domino_cycle(tiles):
         if tiles[i-1][1] != tiles[i][0]:
             return False
     return True
+
 
 def words_with_letters(words, letters):
     """
@@ -74,21 +80,23 @@ def words_with_letters(words, letters):
             subsequent_words.append(word)
     return subsequent_words
 
+
 def taxi_zum_zum(moves):
     """
     11. Taxi Zum Zum
     """
-    direction =[(0, 1), (1, 0), (0, -1), (-1, 0)]
+    direction = [(0, 1), (1, 0), (0, -1), (-1, 0)]
     index = 0
     x, y = 0, 0
     for d in moves:
         if d == 'L':
-            index = (index - 1) % 4 
+            index = (index - 1) % 4
         elif d == 'R':
-            index = (index + 1) % 4 
+            index = (index + 1) % 4
         elif d == 'F':
             x, y = x + direction[index][0], y + direction[index][1]
     return (x, y)
+
 
 def give_change(amount, coins):
     """
@@ -101,6 +109,7 @@ def give_change(amount, coins):
             changes.append(coin)
     return changes
 
+
 def safe_squares_rooks(n, rooks):
     """
     13. Rooks on a rampage
@@ -111,6 +120,7 @@ def safe_squares_rooks(n, rooks):
         row.add(rook[0])
         column.add(rook[1])
     return (n-(len(row)))*(n-len(column))
+
 
 def words_with_given_shape(words, shape):
     """
@@ -126,50 +136,56 @@ def words_with_given_shape(words, shape):
                 if word[i-1] == word[i]:
                     word_shape.append(0)
                 else:
-                    word_shape.append(1 if word[i-1]<word[i] else -1)
+                    word_shape.append(1 if word[i-1] < word[i] else -1)
             if word_shape == shape:
-                words_with_shape.append(word)    
+                words_with_shape.append(word)
     return words_with_shape
+
 
 def is_left_handed(pips):
     """
     15. Chirality
     """
-    if sorted(pips) not in [[1,2,3],[1,2,4],[1,3,5],[4,5,6]]:
+    if sorted(pips) not in [[1, 2, 3], [1, 2, 4], [1, 3, 5], [4, 5, 6]]:
         return False
-    return pips[0]<pips[1]<pips[2] or pips[2]<pips[0]<pips[1] or pips[1]<pips[2]<pips[0] 
-           
+    return pips[0] < pips[1] < pips[2] or pips[2] < pips[0] < pips[1] or pips[1] < pips[2] < pips[0]
+
+
 def winning_card(cards, trump=None):
     """
     16. The card that wins the trick
     """
     suits = {'clubs': 4, 'diamonds': 3, 'hearts': 2, 'spades': 1}
     ranks = {'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8,
-         'nine': 9, 'ten': 10, 'jack': 11, 'queen': 12, 'king': 13, 'ace': 14}
+             'nine': 9, 'ten': 10, 'jack': 11, 'queen': 12, 'king': 13, 'ace': 14}
     winner = None
     for card in cards:
-        if winner is None: 
+        if winner is None:
             winner = card
             if not trump:
                 trump = card[1]
-        elif card[1]==trump and (winner[1] != trump or ranks[winner[0]]<ranks[card[0]]):
+        elif card[1] == trump and (winner[1] != trump or ranks[winner[0]] < ranks[card[0]]):
             winner = card
-        elif winner[1]==card[1] and ranks[winner[0]]<ranks[card[0]]:
+        elif winner[1] == card[1] and ranks[winner[0]] < ranks[card[0]]:
             winner = card
     return winner
+
 
 def knight_jump(knight, start, end):
     """
     17. Do you reach many, do you reach one?
     """
-    substract = tuple(sorted([abs(x - y) for x, y in zip(start, end)], reverse=True))
+    substract = tuple(sorted([abs(x - y)
+                              for x, y in zip(start, end)], reverse=True))
     return substract == knight
+
 
 def seven_zero(n):
     """
     18. Sevens rule, zeros drool
     """
     return
+
     def generate70(d):
         seven_zero = 0
         k = 1
@@ -177,15 +193,15 @@ def seven_zero(n):
             seven_zero += 7*10**(d-k)
             yield seven_zero
             k += 1
-    
-    length = len(str(n))
-    div5_2 = n%5 == 0 or n%2==2
 
-    while length>0:
+    length = len(str(n))
+    div5_2 = n % 5 == 0 or n % 2 == 2
+
+    while length > 0:
         if div5_2:
             seven_zeros = generate70(length)
             for sz in seven_zeros:
-                if sz%n == 0:
+                if sz % n == 0:
                     return sz
         else:
             seven_zero = int("7"*length)
@@ -193,6 +209,7 @@ def seven_zero(n):
                 return seven_zero
 
         length += 1
+
 
 def can_balance(items):
     """
@@ -203,13 +220,14 @@ def can_balance(items):
     for index in range(1, len(items)):
         left, right = 0, 0
         for i, item in enumerate(items[:index]):
-            left+=item*(index-i)
+            left += item*(index-i)
         for i, item in enumerate(items[index+1:]):
             right += item*(i+1)
         if left == right:
             return index
         left, right = 0, 0
     return -1
+
 
 def josephus(n, k):
     """
@@ -224,24 +242,27 @@ def josephus(n, k):
         del rest[index]
     return final
 
+
 def group_and_skip(n, out, ins):
     """
     21. All your bases are belong to us
     """
     number = []
     while n >= out:
-        number.append(n%out)
+        number.append(n % out)
         n = ins*(n//out)
     if n > 0:
         number.append(n)
     return number
 
+
 def pyramid_blocks(n, m, h):
     """
     22. Count the balls off the brass monkey
     """
-    sum = h*m*n + h*(h-1)//2*(m+n) +  ((h-1) * h * (2 * (h-1) + 1)) // 6
+    sum = h*m*n + h*(h-1)//2*(m+n) + ((h-1) * h * (2 * (h-1) + 1)) // 6
     return sum
+
 
 def count_growlers(animals):
     """
@@ -263,29 +284,31 @@ def count_growlers(animals):
             count += 1
     return count
 
+
 def bulgarian_solitaire(piles, k):
     """
     24. Bulgarian solitair
     """
     new_piles = []
     count = 0
-    while not all(n in piles for n in range(1,k+1)):
+    while not all(n in piles for n in range(1, k+1)):
         new_piles = []
         for p in piles:
             if p > 1:
                 new_piles.append(p-1)
-        new_piles.append(len(piles)) 
+        new_piles.append(len(piles))
         piles = new_piles
         count += 1
     return count
-    
+
+
 def scylla_or_charybdis(moves, n):
     """
     25. Scylla or Charybdis?
     """
     ns = []
     k = 0
-    for i, move in enumerate(moves): 
+    for i, move in enumerate(moves):
         if move == "+":
             k += 1
         else:
@@ -293,7 +316,8 @@ def scylla_or_charybdis(moves, n):
         if abs(k) == n - 1:
             ns.append(i)
     return ns
-    
+
+
 def arithmetic_progression(items):
     """
     26. Longest arithmetic progression
@@ -308,6 +332,7 @@ def arithmetic_progression(items):
     max_key = max(counts, key=lambda k: counts[k])
     return [starts[max_key], max_key, counts[max_key]]
 
+
 def tukeys_ninthers(items):
     """
     27. Best one out of three
@@ -321,16 +346,19 @@ def tukeys_ninthers(items):
 
     return items[0]
 
+
 def collect_numbers(perm):
     """
     28. Collecting numbers
     """
+
 
 def verify_betweenness(perm, constraints):
     """
     29. Between the soft and the NP-hard place
     """
     pass
+
 
 def count_troikas(items):
     """
@@ -345,12 +373,13 @@ def count_troikas(items):
     count = 0
     for item in same_items:
         if len(same_items[item]) > 2:
-           all = combinations(same_items[item], 3)
-           for cb in all:
+            all = combinations(same_items[item], 3)
+            for cb in all:
                 st = sorted(cb)
                 if st[1] - st[0] == st[2]-st[1]:
                     count += 1
     return count
+
 
 def crag_score(dice):
     """
@@ -364,11 +393,12 @@ def crag_score(dice):
             return 26
     elif dice[0] == dice[1] == dice[2]:
         return 25
-    elif dice==[1, 2, 3] or dice==[4, 5, 6] or dice==[1, 3, 5] or dice==[2, 4, 6]:
+    elif dice == [1, 2, 3] or dice == [4, 5, 6] or dice == [1, 3, 5] or dice == [2, 4, 6]:
         return 20
-    
-    return max(dice.count(6)*6, dice.count(5)*5,dice.count(4)*4,
-        dice.count(3)*3, dice.count(2)*2, dice.count(1))
+
+    return max(dice.count(6)*6, dice.count(5)*5, dice.count(4)*4,
+               dice.count(3)*3, dice.count(2)*2, dice.count(1))
+
 
 def three_summers(items, goal):
     """
@@ -385,11 +415,12 @@ def three_summers(items, goal):
             else:
                 j -= 1
         return False
-    
+
     for i in range(1, len(items)):
         if two_summers(items[i:], goal-items[i-1]):
             return True
     return False
+
 
 def sum_of_two_squares(n):
     """
@@ -406,6 +437,23 @@ def sum_of_two_squares(n):
         else:
             j -= 1
     return None
+
+
+def count_carries(a, b):
+    """
+    34. Carry on Pythonista
+    """
+    count = 0
+    carry = 0
+
+    while (a != 0 and b != 0) or (carry != 0 and (a == 0 or b == 0)):
+        carry = (a % 10 + b % 10 + carry)//10
+        if carry > 0:
+            count += 1
+        a = a // 10
+        b = b // 10
+    return count
+
 
 def duplicate_digit_bonus(n):
     """
@@ -427,4 +475,3 @@ def duplicate_digit_bonus(n):
         if k > 1:
             score += 2*10**(k-2)
     return score
-
