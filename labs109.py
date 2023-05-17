@@ -370,6 +370,26 @@ def crag_score(dice):
     return max(dice.count(6)*6, dice.count(5)*5,dice.count(4)*4,
         dice.count(3)*3, dice.count(2)*2, dice.count(1))
 
+def three_summers(items, goal):
+    """
+    32. Three summers ago
+    """
+    def two_summers(items, goal, i=0, j=None):
+        j = len(items)-1 if j is None else j
+        while i < j:
+            x = items[i] + items[j]
+            if x == goal:
+                return True  # Okay, that's a solution.
+            elif x < goal:
+                i += 1  # Smallest element can't be part of solution.
+            else:
+                j -= 1  # Largest element can't be part of solution.
+        return False
+    
+    for i in range(1, len(items)):
+        if two_summers(items[i:], goal-items[i-1]):
+            return True
+    return False
 
 def duplicate_digit_bonus(n):
     """

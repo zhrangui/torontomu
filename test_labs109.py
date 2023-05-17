@@ -80,5 +80,8 @@ def test_count_troikas():
 def test_crag_score():
     assert crag_score([1, 2, 3]) == 20
 
+def test_three_summers():
+    assert not three_summers([2, 3, 5, 10], 14)
+
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200
