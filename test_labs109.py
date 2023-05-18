@@ -98,5 +98,8 @@ def test_expand_intervals():
 def test_collapse_intervals():
     assert collapse_intervals([2, 3, 8, 11, 12]) == '2-3,8,11-12'
 
+def test_prominences():
+    assert prominences([3, 1, 4]) == [(0, 3, 2), (2, 4, 4)]
+
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200

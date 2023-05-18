@@ -489,7 +489,7 @@ def collapse_intervals(items):
             if int(interval) < pre:
                 interval += ('-' + str(pre))
             intervals.append(interval)
-            interval=str(items[i])
+            interval = str(items[i])
         pre = items[i]
     else:
         if int(interval) < pre:
@@ -497,6 +497,36 @@ def collapse_intervals(items):
         intervals.append(interval)
     return ",".join(intervals)
 
+
+def prominences(height):
+    """
+    38. Prominently featured
+    """
+    peaks = []
+    length = len(height)
+    maximum = max(height)
+    for i in range(length):
+        if (i == 0 or (height[i-1] < height[i])) and (i+1 >= length or height[i] > height[i+1]):
+            if not height[i]:
+                continue
+            if height[i] == maximum:
+                peaks.append((i, height[i], maximum))
+            else:
+                llow = 0
+                for j in range(i-1,-1,-1):
+                    if height[j] > height[i]:
+                        llow = min(height[j:i])
+                        break
+
+                rlow = 0
+                for j in range(i+1,length):
+                    if height[j] > height[i]:
+                        rlow = min(height[i:j])
+                        break
+
+                peaks.append((i, height[i], height[i]-max(llow, rlow)))
+                
+    return peaks
 
 
 def duplicate_digit_bonus(n):
