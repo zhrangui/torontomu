@@ -475,23 +475,46 @@ def expand_intervals(intervals):
     return integers
 
 
+def collapse_intervals(items):
+    """
+    37. Collapse positive integer intervals 
+    """
+    if not items:
+        return ''
+    intervals = []
+    pre = items[0]
+    interval = str(items[0])
+    for i in range(1, len(items)):
+        if items[i] > pre + 1:
+            if int(interval) < pre:
+                interval += ('-' + str(pre))
+            intervals.append(interval)
+            interval=str(items[i])
+        pre = items[i]
+    else:
+        if int(interval) < pre:
+            interval += ('-' + str(pre))
+        intervals.append(interval)
+    return ",".join(intervals)
+
+
 
 def duplicate_digit_bonus(n):
     """
     40. Dibs to dubs
     """
-    str_n=str(n)
-    last=None
-    score=0
-    k=0
+    str_n = str(n)
+    last = None
+    score = 0
+    k = 0
     for i in range(len(str_n)):
         if str_n[i] == last:
             k += 1
         else:
             if k > 1:
                 score += 10**(k-2)
-            last=str_n[i]
-            k=1
+            last = str_n[i]
+            k = 1
     else:
         if k > 1:
             score += 2*10**(k-2)

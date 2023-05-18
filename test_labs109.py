@@ -93,7 +93,10 @@ def leibniz(heads, positions):
     assert leibniz([1, -1, 1, -1], range(4)) == [-1, 2, -4, 8]
 
 def test_expand_intervals():
-    assert expand_intervals('42') == [42]
+    assert expand_intervals('4-6,10-12,16') == [4, 5, 6, 10, 11, 12, 16]
+
+def test_collapse_intervals():
+    assert collapse_intervals([2, 3, 8, 11, 12]) == '2-3,8,11-12'
 
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200
