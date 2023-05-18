@@ -455,22 +455,43 @@ def count_carries(a, b):
     return count
 
 
+def leibniz(heads, positions):
+    """
+    35. As below, so above
+    """
+
+
+def expand_intervals(intervals):
+    """
+    36. Expand positive integer intervals
+    """
+    integers = []
+    for interval in intervals.split(','):
+        ns = interval.split('-')
+        if len(ns) > 1 and ns[0] and ns[1]:
+            integers += list(range(int(ns[0]), int(ns[1])+1))
+        elif ns[0]:
+            integers.append(int(ns[0]))
+    return integers
+
+
+
 def duplicate_digit_bonus(n):
     """
     40. Dibs to dubs
     """
-    str_n = str(n)
-    last = None
-    score = 0
-    k = 0
+    str_n=str(n)
+    last=None
+    score=0
+    k=0
     for i in range(len(str_n)):
         if str_n[i] == last:
             k += 1
         else:
             if k > 1:
                 score += 10**(k-2)
-            last = str_n[i]
-            k = 1
+            last=str_n[i]
+            k=1
     else:
         if k > 1:
             score += 2*10**(k-2)

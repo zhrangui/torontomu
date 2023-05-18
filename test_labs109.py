@@ -89,5 +89,11 @@ def test_sum_of_two_squares():
 def test_count_carries():
     assert count_carries(99999, 1) == 5
 
+def leibniz(heads, positions):
+    assert leibniz([1, -1, 1, -1], range(4)) == [-1, 2, -4, 8]
+
+def test_expand_intervals():
+    assert expand_intervals('42') == [42]
+
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200
