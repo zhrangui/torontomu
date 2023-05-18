@@ -101,5 +101,8 @@ def test_collapse_intervals():
 def test_prominences():
     assert prominences([3, 1, 4]) == [(0, 3, 2), (2, 4, 4)]
 
+def test_candy_share():
+    assert candy_share([4, 0, 0, 0, 0, 1]) == 6
+
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200

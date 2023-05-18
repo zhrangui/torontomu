@@ -184,8 +184,6 @@ def seven_zero(n):
     """
     18. Sevens rule, zeros drool
     """
-    return
-
     def generate70(d):
         seven_zero = 0
         k = 1
@@ -195,7 +193,7 @@ def seven_zero(n):
             k += 1
 
     length = len(str(n))
-    div5_2 = n % 5 == 0 or n % 2 == 2
+    div5_2 = n % 5 == 0 or n % 2 == 0 
 
     while length > 0:
         if div5_2:
@@ -513,20 +511,27 @@ def prominences(height):
                 peaks.append((i, height[i], maximum))
             else:
                 llow = 0
-                for j in range(i-1,-1,-1):
+                for j in range(i-1, -1, -1):
                     if height[j] > height[i]:
                         llow = min(height[j:i])
                         break
 
                 rlow = 0
-                for j in range(i+1,length):
+                for j in range(i+1, length):
                     if height[j] > height[i]:
                         rlow = min(height[i:j])
                         break
 
                 peaks.append((i, height[i], height[i]-max(llow, rlow)))
-                
+
     return peaks
+
+
+def candy_share(candies):
+    """
+    39. Like a kid in a candy store, except without money
+    """
+    pass
 
 
 def duplicate_digit_bonus(n):
