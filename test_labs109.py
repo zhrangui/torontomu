@@ -109,3 +109,6 @@ def test_candy_share():
 
 def test_duplicate_digit_bonus():
     assert duplicate_digit_bonus(43333) == 200
+
+def test_nearest_smaller():
+    assert nearest_smaller([-8, -7, 0, -12, 8]) == [-12, -8, -12, -12, -12]

@@ -586,3 +586,36 @@ def duplicate_digit_bonus(n):
         if k > 1:
             score += 2*10**(k-2)
     return score
+
+
+def nearest_smaller(items):
+    """
+    def nearest_smaller(items):
+    """
+    length = len(items)
+    new_items = []
+    for i in range(length):
+        llow = None
+        rlow = None
+        for j in range(i-1,-1,-1):
+            if items[j] < items[i]:
+                llow = items[j]
+                break
+        for k in range(i, length):
+            if items[k] < items[i]:
+                rlow = items[k]
+                break
+        if llow is not None and rlow is not None:
+            if i-j > k-i:
+                low = items[k]
+            elif i-j == k-i:
+                low = min(llow, rlow)
+            else:
+                low = items[j]
+        else:
+            low = rlow if llow is None else llow
+
+        low = items[i] if low is None else low
+        new_items.append(low)
+    return new_items
+        
