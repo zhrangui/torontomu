@@ -14,6 +14,9 @@ def test_words_with_letters():
 def test_domino_cycle():
     assert domino_cycle([(3, 5), (5, 2), (2, 3)])
 
+def test_colour_trio():
+    assert colour_trio('rybyry') == 'r'
+
 def test_riffle():
     assert riffle([1, 2, 3, 4, 5, 6, 7, 8]) == [1, 5, 2, 6, 3, 7, 4, 8]
 

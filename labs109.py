@@ -63,6 +63,22 @@ def domino_cycle(tiles):
     return True
 
 
+def colour_trio(colours):
+    """
+    7. Colour trio
+    """
+    while len(colours) > 1:
+        new_colours = ''
+        for i in range(1, len(colours)):
+            if colours[i-1]==colours[i]:
+                new_colours += colours[i]
+            else:
+                colour = "bry".replace(colours[i-1], '').replace(colours[i], '')
+                new_colours += colour
+        colours = new_colours
+    return colours
+
+
 def words_with_letters(words, letters):
     """
     10. Subsequent words
@@ -531,8 +547,22 @@ def candy_share(candies):
     """
     39. Like a kid in a candy store, except without money
     """
-    pass
-
+    count = 0
+    length = len(candies)
+    while True:
+        share = False
+        for i in range(length):
+            if candies[i] > 1:
+                candies[i-1] += 1
+                candies[i] -= 2
+                candies[(i+1)%length] += 1
+                share =True
+   
+        if share:
+            count += 1
+        else:
+            return count
+    
 
 def duplicate_digit_bonus(n):
     """
