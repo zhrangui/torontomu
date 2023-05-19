@@ -67,13 +67,15 @@ def colour_trio(colours):
     """
     7. Colour trio
     """
+    clrs = {'b': 0, 'r': 1, 'y': 2}
+    clrIndex = list(clrs.keys())
     while len(colours) > 1:
         new_colours = ''
         for i in range(1, len(colours)):
             if colours[i-1]==colours[i]:
                 new_colours += colours[i]
             else:
-                colour = "bry".replace(colours[i-1], '').replace(colours[i], '')
+                colour = clrIndex[-(clrs[colours[i-1]]+clrs[colours[i]]) % 3]
                 new_colours += colour
         colours = new_colours
     return colours
