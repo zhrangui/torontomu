@@ -630,12 +630,15 @@ def ordinal_transform(seed, i):
         for sd in seed:
             c = count.get(sd, 0) + 1
             count[sd] = c
-            new_seed.append(c)      
+            new_seed.append(c)
         seed = seed + new_seed
     return seed[i]
+
 
 def squares_intersect(s1, s2):
     """
     43. Interesting, intersecting
     """
-    pass
+    x = not (s1[0]+s1[2] <= s2[0] or s2[0]+s2[2] <= s1[0])
+    y = not (s1[1]+s1[2] <= s2[1] or s2[1]+s2[2] <= s1[1])
+    return x or y

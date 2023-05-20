@@ -116,5 +116,5 @@ def test_nearest_smaller():
 def test_ordinal_transform():
     assert ordinal_transform([1, 1, 6, 4], 30) == 2
 
-def test_squares_intersect(s1, s2):
-    assert not squares_intersect((3, 6, 1), (8, 3, 5))
+def test_squares_intersect():
+    assert squares_intersect((4, 1, 2), (0, -4, 4))
