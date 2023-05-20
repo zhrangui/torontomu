@@ -639,6 +639,13 @@ def squares_intersect(s1, s2):
     """
     43. Interesting, intersecting
     """
-    x = not (s1[0]+s1[2] <= s2[0] or s2[0]+s2[2] <= s1[0])
-    y = not (s1[1]+s1[2] <= s2[1] or s2[1]+s2[2] <= s1[1])
-    return x or y
+    x = not (s1[0]+s1[2] < s2[0] or s2[0]+s2[2] < s1[0])
+    y = not (s1[1]+s1[2] < s2[1] or s2[1]+s2[2] < s1[1])
+    return x and y
+
+
+def oware_move(board, house):
+    """
+    44. So shall you sow
+    """
+    pass

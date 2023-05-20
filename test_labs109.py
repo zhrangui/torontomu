@@ -117,4 +117,7 @@ def test_ordinal_transform():
     assert ordinal_transform([1, 1, 6, 4], 30) == 2
 
 def test_squares_intersect():
-    assert squares_intersect((4, 1, 2), (0, -4, 4))
+    assert squares_intersect((1, -5, 3), (0, -2, 3))
+
+def test_oware_move(board, house):
+    assert oware_move([0, 2, 1, 2], 1) == [0, 0, 0, 0]
