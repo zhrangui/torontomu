@@ -72,7 +72,7 @@ def colour_trio(colours):
     while len(colours) > 1:
         new_colours = ''
         for i in range(1, len(colours)):
-            if colours[i-1]==colours[i]:
+            if colours[i-1] == colours[i]:
                 new_colours += colours[i]
             else:
                 colour = clrIndex[-(clrs[colours[i-1]]+clrs[colours[i]]) % 3]
@@ -211,7 +211,7 @@ def seven_zero(n):
             k += 1
 
     length = len(str(n))
-    div5_2 = n % 5 == 0 or n % 2 == 0 
+    div5_2 = n % 5 == 0 or n % 2 == 0
 
     while length > 0:
         if div5_2:
@@ -557,14 +557,14 @@ def candy_share(candies):
             if candies[i] > 1:
                 candies[i-1] += 1
                 candies[i] -= 2
-                candies[(i+1)%length] += 1
-                share =True
-   
+                candies[(i+1) % length] += 1
+                share = True
+
         if share:
             count += 1
         else:
             return count
-    
+
 
 def duplicate_digit_bonus(n):
     """
@@ -597,7 +597,7 @@ def nearest_smaller(items):
     for i in range(length):
         llow = None
         rlow = None
-        for j in range(i-1,-1,-1):
+        for j in range(i-1, -1, -1):
             if items[j] < items[i]:
                 llow = items[j]
                 break
@@ -618,4 +618,24 @@ def nearest_smaller(items):
         low = items[i] if low is None else low
         new_items.append(low)
     return new_items
-        
+
+
+def ordinal_transform(seed, i):
+    """
+    42. Iterated ordinal transform
+    """
+    while len(seed) <= i:
+        count = {}
+        new_seed = []
+        for sd in seed:
+            c = count.get(sd, 0) + 1
+            count[sd] = c
+            new_seed.append(c)      
+        seed = seed + new_seed
+    return seed[i]
+
+def squares_intersect(s1, s2):
+    """
+    43. Interesting, intersecting
+    """
+    pass
