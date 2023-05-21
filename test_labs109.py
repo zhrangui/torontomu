@@ -130,3 +130,6 @@ def test_brussels_choice_step():
 
 def test_count_corners():
     assert count_corners([(0, 0), (0, 4), (0, 6), (2, 4), (4, 0)]) == 2
+
+def test_mcculloch():
+    assert mcculloch('4524938') == '83948394'

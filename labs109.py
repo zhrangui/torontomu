@@ -700,6 +700,25 @@ def count_corners(points):
             if points[i][0] == points[j][0]:
                 h = points[j][1] - points[i][1]
                 if h > 0:
-                    if (points[i][0]+h,points[i][1]) in points[j+1:]:
+                    if (points[i][0]+h, points[i][1]) in points[j+1:]:
                         count += 1
     return count
+
+
+def mcculloch(digits):
+    """
+    48. McCulloch's second machine
+    """
+    def mcculloch(x):
+        if len(x) == 1:
+            return x
+        elif x[0] == '2':
+            return x[1:]
+        elif x[0] == '3':
+            return mcculloch(x[1:]) + '2' + mcculloch(x[1:])
+        elif x[0] == '4':
+            return mcculloch(x[1:])[::-1]
+        elif x[0] == '5':
+            return mcculloch(x[1:]) + mcculloch(x[1:])
+        return None
+    return mcculloch(digits)
