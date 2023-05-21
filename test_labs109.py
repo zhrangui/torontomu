@@ -127,3 +127,6 @@ def test_remove_after_kth():
 
 def test_brussels_choice_step():
     assert  brussels_choice_step(42, 1, 2) == [21, 22, 41, 44, 82, 84]
+
+def test_count_corners():
+    assert count_corners([(0, 0), (0, 4), (0, 6), (2, 4), (4, 0)]) == 2

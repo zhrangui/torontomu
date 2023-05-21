@@ -664,6 +664,7 @@ def remove_after_kth(items, k=1):
         count[item] = c + 1
     return new_items
 
+
 def brussels_choice_step(n, mink, maxk):
     """
     46. Brussel's choice
@@ -676,7 +677,7 @@ def brussels_choice_step(n, mink, maxk):
             if i+k <= length:
                 sub = sn[i:i+k]
                 subn = int(sub)
-                lsn =""
+                lsn = ""
                 if i > 0:
                     lsn = sn[0:i]
                 rsn = ""
@@ -687,3 +688,18 @@ def brussels_choice_step(n, mink, maxk):
                 result.append(int(lsn+str(subn*2)+rsn))
     return sorted(result)
 
+
+def count_corners(points):
+    """
+    47. Cornered cases
+    """
+    count = 0
+    length = len(points)
+    for i in range(length):
+        for j in range(i+1, length):
+            if points[i][0] == points[j][0]:
+                h = points[j][1] - points[i][1]
+                if h > 0:
+                    if (points[i][0]+h,points[i][1]) in points[j+1:]:
+                        count += 1
+    return count
