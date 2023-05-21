@@ -663,3 +663,27 @@ def remove_after_kth(items, k=1):
             new_items.append(item)
         count[item] = c + 1
     return new_items
+
+def brussels_choice_step(n, mink, maxk):
+    """
+    46. Brussel's choice
+    """
+    result = []
+    sn = str(n)
+    length = len(sn)
+    for i in range(length):
+        for k in range(mink, maxk+1):
+            if i+k <= length:
+                sub = sn[i:i+k]
+                subn = int(sub)
+                lsn =""
+                if i > 0:
+                    lsn = sn[0:i]
+                rsn = ""
+                if i+k < length:
+                    rsn = sn[i+k:]
+                if subn % 2 == 0:
+                    result.append(int(lsn+str(subn//2)+rsn))
+                result.append(int(lsn+str(subn*2)+rsn))
+    return sorted(result)
+
