@@ -121,3 +121,6 @@ def test_squares_intersect():
 
 def test_oware_move(board, house):
     assert oware_move([0, 2, 1, 2], 1) == [0, 0, 0, 0]
+
+def test_remove_after_kth():
+    assert remove_after_kth([42, 42, 42, 42, 42, 42, 42], 3) == [42, 42, 42]

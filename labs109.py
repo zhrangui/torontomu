@@ -649,3 +649,17 @@ def oware_move(board, house):
     44. So shall you sow
     """
     pass
+
+
+def remove_after_kth(items, k=1):
+    """
+    45. That's enough of you!
+    """
+    count = {}
+    new_items = []
+    for item in items:
+        c = count.get(item, 0)
+        if c < k:
+            new_items.append(item)
+        count[item] = c + 1
+    return new_items
