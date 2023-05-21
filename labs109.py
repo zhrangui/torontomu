@@ -722,3 +722,14 @@ def mcculloch(digits):
             return mcculloch(x[1:]) + mcculloch(x[1:])
         return None
     return mcculloch(digits)
+
+def first_preceded_by_smaller(items, k=1):
+    """
+    49. That's enough for you!
+    """
+    length = len(items)
+    for i in range(1, length):
+        count = sum([1 for item in items[0:i] if item < items[i]])
+        if count >= k:
+            return items[i]
+

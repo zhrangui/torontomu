@@ -133,3 +133,6 @@ def test_count_corners():
 
 def test_mcculloch():
     assert mcculloch('4524938') == '83948394'
+
+def test_first_preceded_by_smaller():
+    assert first_preceded_by_smaller([11, 7, 1, 9, 11], 1) == 9
