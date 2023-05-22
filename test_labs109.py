@@ -6,22 +6,25 @@ WORDS_WITH_LETTERS = "words_sorted.txt"
 def test_is_ascending():
     assert is_ascending([-5, 10, 99, 123456])
 
-def test_words_with_letters():
-    with open(WORDS_WITH_LETTERS, 'r') as f:
-        words = [line.strip() for line in f.readlines()]
-    assert words_with_letters(words, 'brohiic')
-
-def test_domino_cycle():
-    assert domino_cycle([(3, 5), (5, 2), (2, 3)])
+def test_riffle():
+    assert riffle([1, 2, 3, 4, 5, 6, 7, 8]) == [1, 5, 2, 6, 3, 7, 4, 8]
 
 def test_only_odd_digits():
-    assert only_odd_digits(1357975313579) 
+    assert only_odd_digits(1357975313579)
+
+def test_is_cyclops():
+    assert is_cyclops(98053)
+
+def test_domino_cycle():
+    assert domino_cycle([(3, 5), (5, 2), (2, 3)])    
 
 def test_colour_trio():
     assert colour_trio('rybyry') == 'r'
 
-def test_riffle():
-    assert riffle([1, 2, 3, 4, 5, 6, 7, 8]) == [1, 5, 2, 6, 3, 7, 4, 8]
+def test_words_with_letters():
+    with open(WORDS_WITH_LETTERS, 'r') as f:
+        words = [line.strip() for line in f.readlines()]
+    assert words_with_letters(words, 'brohiic')
 
 def test_taxi_zum_zum():
     assert taxi_zum_zum("RFRL") == (1, 0)
