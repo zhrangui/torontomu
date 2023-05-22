@@ -145,3 +145,8 @@ def test_count_and_say():
 
 def test_safe_squares_bishops():
     assert safe_squares_bishops(4, [(2, 3), (0, 1)]) == 11
+
+def test_word_height():
+    with open(WORDS_WITH_LETTERS, 'r') as f:
+        words = [line.strip() for line in f.readlines()]
+    assert word_height(words, 'chukker') == 1

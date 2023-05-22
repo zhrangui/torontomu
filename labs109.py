@@ -3,6 +3,7 @@
 import sys
 import math
 from itertools import combinations
+import bisect
 
 sys.set_int_max_str_digits(0)
 
@@ -778,3 +779,30 @@ def safe_squares_bishops(n, bishops):
     return count
 
 
+def word_height(words, word):
+    """
+    53. Dem's some mighty tall words, pardner
+    """
+    def find(word):
+        index = bisect.bisect_left(words, word)
+        return index < len(words) and words[index] == word
+
+    if find(word):
+        maximum = 0
+        for i in range(1, len(word)):
+            lcount, rcount, count = 0, 0, 0
+            if find(word[:i]):
+                lcount = word_height(words, word[:i])
+                if not lcount:
+                    continue
+            if find(word[i:]):
+                rcount = word_height(words, word[i:])
+                if not rcount:
+                    continue
+            if lcount and rcount:
+                count = max(lcount, rcount)
+            if count > maximum:
+                maximum = count
+        return maximum + 1
+    else:
+        return 0
