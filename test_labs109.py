@@ -14,6 +14,9 @@ def test_words_with_letters():
 def test_domino_cycle():
     assert domino_cycle([(3, 5), (5, 2), (2, 3)])
 
+def test_only_odd_digits():
+    assert only_odd_digits(1357975313579) 
+
 def test_colour_trio():
     assert colour_trio('rybyry') == 'r'
 

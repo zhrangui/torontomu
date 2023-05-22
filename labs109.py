@@ -53,6 +53,21 @@ def riffle(items, out=True):
             shuffle.append(items[index])
     return shuffle
 
+def only_odd_digits(n):
+    """
+    4. Even the odds
+    """
+    while n > 10:
+        r = n % 10
+        if r % 2 == 0:
+            return False
+        n = n // 10
+    return True
+
+def is_cyclops(n):
+    """
+    """
+    pass
 
 def domino_cycle(tiles):
     """
