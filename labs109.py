@@ -53,10 +53,12 @@ def riffle(items, out=True):
             shuffle.append(items[index])
     return shuffle
 
+
 def only_odd_digits(n):
     """
     4. Even the odds
     """
+
     while n > 0:
         r = n % 10
         if r % 2 == 0:
@@ -64,10 +66,25 @@ def only_odd_digits(n):
         n = n // 10
     return True
 
+
 def is_cyclops(n):
     """
-    """
-    pass
+    5. Cyclops numbers
+    """ 
+    if n == 0:
+        return True
+    length = 0
+    p0 = -1
+    while n > 0:
+        r = n % 10
+        if r == 0:
+            if p0 >=0:
+                return False
+            p0 = length
+        length += 1
+        n = n // 10
+    return length % 2 == 1 and length // 2 == p0
+
 
 def domino_cycle(tiles):
     """
@@ -96,6 +113,12 @@ def colour_trio(colours):
         colours = new_colours
     return colours
 
+
+def count_dominators(items):
+    """
+    8. Count dominators
+    """
+    pass
 
 def words_with_letters(words, letters):
     """
