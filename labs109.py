@@ -723,6 +723,7 @@ def mcculloch(digits):
         return None
     return mcculloch(digits)
 
+
 def first_preceded_by_smaller(items, k=1):
     """
     49. That's enough for you!
@@ -733,11 +734,13 @@ def first_preceded_by_smaller(items, k=1):
         if count >= k:
             return items[i]
 
+
 def eliminate_neighbours(items):
     """
     50. Crab bucket list
     """
     pass
+
 
 def count_and_say(digits):
     """
@@ -758,4 +761,20 @@ def count_and_say(digits):
         if count > 0:
             new_digits += str(count) + pre
     return new_digits
+
+
+def safe_squares_bishops(n, bishops):
+    """"
+    52. Bishops on a binge
+    """
+    count = 0
+    for i in range(n):
+        for j in range(n):
+            for bishop in bishops:
+                if abs(i-bishop[0]) == abs(j-bishop[1]):
+                    break
+            else:
+                count += 1
+    return count
+
 

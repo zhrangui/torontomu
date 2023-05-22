@@ -142,3 +142,6 @@ def test_eliminate_neighbours():
 
 def test_count_and_say():
     assert count_and_say('333388822211177') == '4338323127'
+
+def test_safe_squares_bishops():
+    assert safe_squares_bishops(4, [(2, 3), (0, 1)]) == 11
