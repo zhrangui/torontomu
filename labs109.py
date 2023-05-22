@@ -70,7 +70,7 @@ def only_odd_digits(n):
 def is_cyclops(n):
     """
     5. Cyclops numbers
-    """ 
+    """
     if n == 0:
         return True
     length = 0
@@ -78,7 +78,7 @@ def is_cyclops(n):
     while n > 0:
         r = n % 10
         if r == 0:
-            if p0 >=0:
+            if p0 >= 0:
                 return False
             p0 = length
         length += 1
@@ -118,7 +118,14 @@ def count_dominators(items):
     """
     8. Count dominators
     """
-    pass
+    rmaxim = items[-1]
+    maxima = [rmaxim]
+    for item in items[-1::-1]:
+        if item > rmaxim:
+            rmaxim = item
+            maxima.append(item)
+    return len(maxima)
+
 
 def words_with_letters(words, letters):
     """

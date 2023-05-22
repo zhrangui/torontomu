@@ -21,7 +21,7 @@ def test_domino_cycle():
 def test_colour_trio():
     assert colour_trio('rybyry') == 'r'
 
-def testcount_dominators():
+def test_count_dominators():
     assert count_dominators([42, 7, 12, 9, 2, 5]) == 4
 
 def test_words_with_letters():
