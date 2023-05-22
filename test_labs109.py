@@ -24,6 +24,9 @@ def test_colour_trio():
 def test_count_dominators():
     assert count_dominators([42, 7, 12, 9, 2, 5]) == 4
 
+def test_extract_increasing():
+    assert extract_increasing('045349') == [0, 4, 5, 34]
+
 def test_words_with_letters():
     with open(WORDS_WITH_LETTERS, 'r') as f:
         words = [line.strip() for line in f.readlines()]

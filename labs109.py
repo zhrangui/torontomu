@@ -127,6 +127,22 @@ def count_dominators(items):
     return len(maxima)
 
 
+def extract_increasing(digits):
+    """
+    9. Beat the previous
+    """
+    result = []
+    prev = -1
+    current = 0
+    for d in digits:
+        current = current*10 + int(d)
+        if current > prev:
+            result.append(current)
+            prev = current
+            current = 0
+    return result
+
+
 def words_with_letters(words, letters):
     """
     10. Subsequent words
