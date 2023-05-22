@@ -136,3 +136,9 @@ def test_mcculloch():
 
 def test_first_preceded_by_smaller():
     assert first_preceded_by_smaller([11, 7, 1, 9, 11], 1) == 9
+
+def test_eliminate_neighbours():
+    assert eliminate_neighbours([8, 3, 4, 1, 7, 2, 6, 5]) == 3
+
+def test_count_and_say():
+    assert count_and_say('333388822211177') == '4338323127'

@@ -733,3 +733,29 @@ def first_preceded_by_smaller(items, k=1):
         if count >= k:
             return items[i]
 
+def eliminate_neighbours(items):
+    """
+    50. Crab bucket list
+    """
+    pass
+
+def count_and_say(digits):
+    """
+    51. What do you hear, what do you say?
+    """
+    count = 0
+    pre = None
+    new_digits = ''
+    for digit in digits:
+        if pre == digit:
+            count += 1
+        else:
+            if count > 0:
+                new_digits += str(count) + pre
+            pre = digit
+            count = 1
+    else:
+        if count > 0:
+            new_digits += str(count) + pre
+    return new_digits
+
