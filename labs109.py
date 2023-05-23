@@ -867,3 +867,43 @@ def word_height(words, word):
         return maximum + 1
     else:
         return 0
+
+
+def counting_series(n):
+    """
+    54. Up for the count
+    """
+    k = 0
+    n9 = 9*10**k
+    n += 1
+    while n - n9 > 0:
+        n -= n9
+        k += 1
+        n9 = (n9 + 9*10**k)*(k+1)
+    m = n // (k+1) 
+    r = n % (k+1)
+    x = (m // 10**(k-r)) % 10
+    return x
+
+
+def reverse_vowels(text):
+    """
+    55. Revorse the vewels
+    """
+    vowels = ['a', 'e', 'i', 'o', 'u']
+
+    vs = []
+    for t in text:
+        lt = t.lower() 
+        if lt in vowels:
+            vs.append(lt)
+    new_text = ''
+    for t in text:
+        if t.lower() in vowels:
+            if t.isupper():
+                new_text += vs.pop().upper()
+            else:
+                new_text += vs.pop()
+        else:
+            new_text += t
+    return new_text

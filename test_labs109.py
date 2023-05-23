@@ -162,3 +162,9 @@ def test_word_height():
     with open(WORDS_WITH_LETTERS, 'r') as f:
         words = [line.strip() for line in f.readlines()]
     assert word_height(words, 'chukker') == 1
+
+def test_counting_series():
+    assert counting_series(100) == 5
+
+def test_reverse_vowels():
+    assert reverse_vowels('Bengt Hilgursson') == 'Bongt Hulgirssen'
