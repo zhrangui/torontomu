@@ -615,13 +615,14 @@ def candy_share(candies):
     length = len(candies)
     while True:
         share = False
+        new_candies = candies[::]
         for i in range(length):
             if candies[i] > 1:
-                candies[i-1] += 1
-                candies[i] -= 2
-                candies[(i+1) % length] += 1
+                new_candies[i-1] += 1
+                new_candies[i] -= 2
+                new_candies[(i+1) % length] += 1
                 share = True
-
+        candies = new_candies
         if share:
             count += 1
         else:
