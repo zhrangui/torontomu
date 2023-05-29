@@ -912,7 +912,7 @@ def reverse_vowels(text):
     return new_text
 
 
-def spread_the_coins(coins, left, right):
+def _spread_the_coins(coins, left, right):
     """
     56. Everybody on the floor, do the Scrooge Shuffle
     """
@@ -963,3 +963,149 @@ def calkin_wilf(n):
         q.append(Fraction(r.numerator, t))
         q.append(Fraction(t, r.denominator))
     return q[n-n//2-2]
+
+
+def conjugate_regular(verb, subject, tense):
+    """
+    58. Verbos regulares
+    """
+    ar_endings = {
+        'yo': {
+            'presente': 'o',
+            'pretérito': 'é',
+            'imperfecto': 'aba',
+            'futuro': 'é'
+        },
+        'tú': {
+            'presente': 'as',
+            'pretérito': 'aste',
+            'imperfecto': 'abas',
+            'futuro': 'ás'
+        },
+        'él': {
+            'presente': 'a',
+            'pretérito': 'ó',
+            'imperfecto': 'aba',
+            'futuro': 'á'
+        },
+        'nosotros': {
+            'presente': 'amos',
+            'pretérito': 'amos',
+            'imperfecto': 'ábamos',
+            'futuro': 'emos'
+        },
+        'vosotros': {
+            'presente': 'áis',
+            'pretérito': 'asteis',
+            'imperfecto': 'abais',
+            'futuro': 'éis'
+        },
+        'ellos': {
+            'presente': 'an',
+            'pretérito': 'aron',
+            'imperfecto': 'aban',
+            'futuro': 'án'
+        }
+    }
+
+    ar_endings['ella'] = ar_endings['él']
+    ar_endings['usted'] = ar_endings['él']
+    ar_endings['ellas'] = ar_endings['ellos']
+    ar_endings['ustedes'] = ar_endings['ellos']
+    ar_endings['nosotras'] = ar_endings['nosotros']
+    ar_endings['vosotras'] = ar_endings['vosotros']
+
+    er_endings = {
+        'yo': {
+            'presente': 'o',
+            'pretérito': 'í',
+            'imperfecto': 'ía',
+            'futuro': 'é'
+        },
+        'tú': {
+            'presente': 'es',
+            'pretérito': 'iste',
+            'imperfecto': 'ías',
+            'futuro': 'ás'
+        },
+        'él': {
+            'presente': 'e',
+            'pretérito': 'ió',
+            'imperfecto': 'ía',
+            'futuro': 'á'
+        },
+        'nosotros': {
+            'presente': 'emos',
+            'pretérito': 'imos',
+            'imperfecto': 'íamos',
+            'futuro': 'emos'
+        },
+        'vosotros': {
+            'presente': 'éis',
+            'pretérito': 'isteis',
+            'imperfecto': 'íais',
+            'futuro': 'éis'
+        },
+        'ellos': {
+            'presente': 'en',
+            'pretérito': 'ieron',
+            'imperfecto': 'ían',
+            'futuro': 'án'
+        }
+    }
+    er_endings['ella'] = er_endings['él']
+    er_endings['usted'] = er_endings['él']
+    er_endings['ellas'] = er_endings['ellos']
+    er_endings['ustedes'] = er_endings['ellos']
+    er_endings['nosotras'] = er_endings['nosotros']
+    er_endings['vosotras'] = er_endings['vosotros']
+
+    ir_endings = {
+        'yo': {
+            'presente': 'o',
+            'pretérito': 'í',
+            'imperfecto': 'ía',
+            'futuro': 'é'
+        },
+        'tú': {
+            'presente': 'es',
+            'pretérito': 'iste',
+            'imperfecto': 'ías',
+            'futuro': 'ás'
+        },
+        'él': {
+            'presente': 'e',
+            'pretérito': 'ió',
+            'imperfecto': 'ía',
+            'futuro': 'á'
+        },
+        'nosotros': {
+            'presente': 'imos',
+            'pretérito': 'imos',
+            'imperfecto': 'íamos',
+            'futuro': 'emos'
+        },
+        'vosotros': {
+            'presente': 'ís',
+            'pretérito': 'isteis',
+            'imperfecto': 'íais',
+            'futuro': 'éis'
+        },
+        'ellos': {
+            'presente': 'en',
+            'pretérito': 'ieron',
+            'imperfecto': 'ían',
+            'futuro': 'án'
+        }
+    }
+    ir_endings['ella'] = ir_endings['él']
+    ir_endings['usted'] = ir_endings['él']
+    ir_endings['ellas'] = ir_endings['ellos']
+    ir_endings['ustedes'] = ir_endings['ellos']
+    ir_endings['nosotras'] = ir_endings['nosotros']
+    ir_endings['vosotras'] = ir_endings['vosotros']
+
+    suffix =  verb[-2:]
+    endings = ar_endings if suffix == 'ar' else er_endings if suffix == 'er' else ir_endings 
+    stem = verb if tense == 'futuro' else verb[:-2]
+    return stem + endings[subject][tense]

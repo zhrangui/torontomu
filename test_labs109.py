@@ -235,3 +235,7 @@ def test_spread_the_coins():
 
 def test_calkin_wilf():
     assert calkin_wilf(10) == Fraction(3, 5)
+
+
+def test_conjugate_regular():
+    assert conjugate_regular('absorber', 'yo', 'pretérito') == 'absorbí'
