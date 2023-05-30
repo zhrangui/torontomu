@@ -1109,3 +1109,25 @@ def conjugate_regular(verb, subject, tense):
     endings = ar_endings if suffix == 'ar' else er_endings if suffix == 'er' else ir_endings 
     stem = verb if tense == 'futuro' else verb[:-2]
     return stem + endings[subject][tense]
+
+
+def frog_collision_time(frog1, frog2):
+    """
+    59. Hippity hoppity, abolish loopity
+    """
+    frog = [x-y for x, y in zip(frog1, frog2)]
+    frog[2:] = [-frog[2], -frog[3]]
+    
+    if frog[2] != 0:
+        t = frog[0] // frog[2]
+        if t > 0 and frog[1] == frog[3] * t and (frog[0] % frog[2])==0:
+            return frog[0] // (frog[2])
+        else:
+            return None
+    elif frog[0] == 0:
+        if frog[3] != 0 and frog[1] // (frog[3])>=0 and (frog[1] % frog[3])==0:
+            return frog[1] // (frog[3])
+        elif frog[1] == 0:
+            return 0
+        else: 
+            return None

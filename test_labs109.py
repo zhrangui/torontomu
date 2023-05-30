@@ -239,3 +239,7 @@ def test_calkin_wilf():
 
 def test_conjugate_regular():
     assert conjugate_regular('absorber', 'yo', 'pretérito') == 'absorbí'
+
+
+def test_frog_collision_time():
+    assert frog_collision_time((2, 14, -7, -8), (2, 6, -7, -10)) == None
