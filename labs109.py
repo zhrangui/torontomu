@@ -1131,3 +1131,38 @@ def frog_collision_time(frog1, frog2):
             return 0
         else: 
             return None
+
+
+def reach_corner(x, y, n, m, aliens):
+    """
+    60. In space, no one can hear you bounce
+    """
+    if x == 0:
+        left, right = False, False
+        for alien in aliens:
+            if alien[0] == x:
+                if y < alien[1]:
+                    right = True
+                elif y > alien[1]:
+                    left = True
+                else:
+                    return False
+        if left and right:
+            return False
+    if y == 0:
+        left, right = False, False
+        for alien in aliens:
+            if alien[1] == y:
+                if y < alien[0]:
+                    right = True
+                elif y > alien[0]:
+                    left = True
+                else:
+                    return False
+        if left and right:
+            return False
+
+    if x == y:
+        for alien in aliens:
+            if y == alien[0]:
+                return False
