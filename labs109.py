@@ -226,6 +226,15 @@ def words_with_given_shape(words, shape):
     return words_with_shape
 
 
+def is_left_handed(pips):
+    """
+    15. Chirality
+    """
+    if sorted(pips) not in [[1, 2, 3], [1, 2, 4], [1, 3, 5], [4, 5, 6]]:
+        return False
+    return pips[0] < pips[1] < pips[2] or pips[2] < pips[0] < pips[1] or pips[1] < pips[2] < pips[0]
+
+
 def winning_card(cards, trump=None):
     """
     16. The card that wins the trick
@@ -375,6 +384,37 @@ def bulgarian_solitaire(piles, k):
     return count
 
 
+def scylla_or_charybdis(moves, n):
+    """
+    25. Scylla or Charybdis?
+    """
+    ns = []
+    k = 0
+    for i, move in enumerate(moves):
+        if move == "+":
+            k += 1
+        else:
+            k -= 1
+        if abs(k) == n - 1:
+            ns.append(i)
+    return ns
+
+
+def arithmetic_progression(items):
+    """
+    26. Longest arithmetic progression
+    """
+    counts = {}
+    starts = {}
+    for i in range(1, len(items)):
+        stride = items[i] - items[i-1]
+        if not stride in counts:
+            starts[stride] = items[i-1]
+        counts[stride] = counts.get(stride, 0) + 1
+    max_key = max(counts, key=lambda k: counts[k])
+    return [starts[max_key], max_key, counts[max_key]]
+
+
 def tukeys_ninthers(items):
     """
     27. Best one out of three
@@ -387,6 +427,19 @@ def tukeys_ninthers(items):
         items = medians
 
     return items[0]
+
+
+def collect_numbers(perm):
+    """
+    28. Collecting numbers
+    """
+
+
+def verify_betweenness(perm, constraints):
+    """
+    29. Between the soft and the NP-hard place
+    """
+    pass
 
 
 def count_troikas(items):
@@ -482,6 +535,12 @@ def count_carries(a, b):
         a = a // 10
         b = b // 10
     return count
+
+
+def leibniz(heads, positions):
+    """
+    35. As below, so above
+    """
 
 
 def expand_intervals(intervals):
@@ -652,6 +711,13 @@ def squares_intersect(s1, s2):
     return x and y
 
 
+def oware_move(board, house):
+    """
+    44. So shall you sow
+    """
+    pass
+
+
 def remove_after_kth(items, k=1):
     """
     45. That's enough of you!
@@ -736,6 +802,13 @@ def first_preceded_by_smaller(items, k=1):
             return items[i]
 
 
+def eliminate_neighbours(items):
+    """
+    50. Crab bucket list
+    """
+    pass
+
+
 def count_and_say(digits):
     """
     51. What do you hear, what do you say?
@@ -801,6 +874,23 @@ def word_height(words, word):
         return 0
 
 
+def counting_series(n):
+    """
+    54. Up for the count
+    """
+    k = 0
+    n9 = 9*10**k
+    n += 1
+    while n - n9 > 0:
+        n -= n9
+        k += 1
+        n9 = (n9 + 9*10**k)*(k+1)
+    m = n // (k+1)
+    r = n % (k+1)
+    x = (m // 10**(k-r)) % 10
+    return x
+
+
 def reverse_vowels(text):
     """
     55. Revorse the vewels
@@ -822,6 +912,45 @@ def reverse_vowels(text):
         else:
             new_text += t
     return new_text
+
+
+def _spread_the_coins(coins, left, right):
+    """
+    56. Everybody on the floor, do the Scrooge Shuffle
+    """
+    threshold = left + right
+    leftmost = 0
+    new_coins = []
+    while any([True for c in coins if c >= threshold]):
+        length = len(coins)
+        pre_right = 0
+        for i in range(length):
+            if coins[i] >= threshold:
+                if i == 0:
+                    new_coins.append(left)
+                    leftmost -= 1
+                else:
+                    if len(new_coins) > 0:
+                        new_coins[-1] += left
+                    else:
+                        new_coins.append(left)
+                        leftmost -= 1
+                new_coins.append(coins[i]-threshold + pre_right)
+
+                pre_right = right
+
+            else:
+                if i == 0 and coins[i] == 0:
+                    leftmost += 1
+                else:
+                    new_coins.append(coins[i]+pre_right)
+                    pre_right = 0
+        else:
+            if pre_right > 0:
+                new_coins.append(pre_right)
+        coins = new_coins
+        new_coins = []
+    return (leftmost, coins)
 
 
 def calkin_wilf(n):
