@@ -1105,8 +1105,8 @@ def conjugate_regular(verb, subject, tense):
     ir_endings['nosotras'] = ir_endings['nosotros']
     ir_endings['vosotras'] = ir_endings['vosotros']
 
-    suffix =  verb[-2:]
-    endings = ar_endings if suffix == 'ar' else er_endings if suffix == 'er' else ir_endings 
+    suffix = verb[-2:]
+    endings = ar_endings if suffix == 'ar' else er_endings if suffix == 'er' else ir_endings
     stem = verb if tense == 'futuro' else verb[:-2]
     return stem + endings[subject][tense]
 
@@ -1117,52 +1117,40 @@ def frog_collision_time(frog1, frog2):
     """
     frog = [x-y for x, y in zip(frog1, frog2)]
     frog[2:] = [-frog[2], -frog[3]]
-    
+
     if frog[2] != 0:
         t = frog[0] // frog[2]
-        if t > 0 and frog[1] == frog[3] * t and (frog[0] % frog[2])==0:
+        if t > 0 and frog[1] == frog[3] * t and (frog[0] % frog[2]) == 0:
             return frog[0] // (frog[2])
         else:
             return None
     elif frog[0] == 0:
-        if frog[3] != 0 and frog[1] // (frog[3])>=0 and (frog[1] % frog[3])==0:
+        if frog[3] != 0 and frog[1] // (frog[3]) >= 0 and (frog[1] % frog[3]) == 0:
             return frog[1] // (frog[3])
         elif frog[1] == 0:
             return 0
-        else: 
+        else:
             return None
 
 
-def reach_corner(x, y, n, m, aliens):
+def nearest_polygonal_number(n, s):
     """
-    60. In space, no one can hear you bounce
+    61. Nearest polygonal number
     """
-    if x == 0:
-        left, right = False, False
-        for alien in aliens:
-            if alien[0] == x:
-                if y < alien[1]:
-                    right = True
-                elif y > alien[1]:
-                    left = True
-                else:
-                    return False
-        if left and right:
-            return False
-    if y == 0:
-        left, right = False, False
-        for alien in aliens:
-            if alien[1] == y:
-                if y < alien[0]:
-                    right = True
-                elif y > alien[0]:
-                    left = True
-                else:
-                    return False
-        if left and right:
-            return False
-
-    if x == y:
-        for alien in aliens:
-            if y == alien[0]:
-                return False
+    a, b = 1, 2
+    while n > ((s-2)*b**2-(s-4)*b)//2:
+        a = b
+        b *= b
+    while a < b:
+        m = (a + b) // 2
+        if a == m:
+            break
+        i = ((s-2)*m**2-(s-4)*m)//2
+        if  n < i:
+            b = m
+        elif n >= i:
+            a = m
+    na = ((s-2)*a**2-(s-4)*a)//2
+    nb = ((s-2)*b**2-(s-4)*b)//2
+    return na if abs(na - n) <= abs(nb - n) else nb 
+    

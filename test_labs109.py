@@ -245,5 +245,5 @@ def test_frog_collision_time():
     assert frog_collision_time((2, 14, -7, -8), (2, 6, -7, -10)) == None
 
 
-def test_reach_corner():
-    assert not reach_corner([(0, 0), (0, 8), (8, 0), (8, 8)])
+def test_nearest_polygonal_number():
+    assert nearest_polygonal_number(10**10, 42) == 9999861561
