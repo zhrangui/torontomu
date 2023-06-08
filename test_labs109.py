@@ -247,3 +247,19 @@ def test_frog_collision_time():
 
 def test_nearest_polygonal_number():
     assert nearest_polygonal_number(10**10, 42) == 9999861561
+
+
+def test_brangelina():
+    assert brangelina('angelina', 'brad') == 'angelad'
+
+
+def test_manhattan_skyline(towers):
+    assert manhattan_skyline([(0, 5, 2), (1, 3, 4)]) == 14
+
+
+def test_fibonacci_sum(n):
+    assert fibonacci_sum(100) == [89, 8, 3]
+
+
+def sum_of_distinct_cubes():
+    assert sum_of_distinct_cubes(855) == [9, 5, 1]

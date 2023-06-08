@@ -657,7 +657,7 @@ def duplicate_digit_bonus(n):
 
 def nearest_smaller(items):
     """
-    def nearest_smaller(items):
+    41. Nearest smaller element
     """
     length = len(items)
     new_items = []
@@ -1155,3 +1155,52 @@ def nearest_polygonal_number(n, s):
     na = ((s-2)*a**2-(s-4)*a)//2
     nb = ((s-2)*b**2-(s-4)*b)//2
     return na if abs(na - n) <= abs(nb - n) else nb
+
+
+def brangelina(first, second):
+    """
+    69. Brangelin-o-matic for the people
+    """
+    vowels = 'aeiou'
+    group, isGroup = [], False
+    for i, c in enumerate(first):
+        if c in vowels:
+            if not isGroup:
+                group.append(i)
+                isGroup = True
+        else:
+            isGroup = False
+    first_part = ''
+    if len(group) > 1:
+        first_part = first[:group[-2]]
+    else:
+        first_part = first[:group[0]]
+    second_part = ''
+    for i, c in enumerate(second):
+        if c in vowels:
+            second_part = second[i:]
+            break
+    return first_part + second_part
+
+
+
+
+def manhattan_skyline(towers):
+    """
+    75. Manhattan skyline
+    """
+    pass
+
+
+def fibonacci_sum(n):
+    """
+    89. Fibonacci sum
+    """
+    pass
+
+
+def sum_of_distinct_cubes(n):
+    """
+    99. Sum of distinct cubes
+    """
+    pass
