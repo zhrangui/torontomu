@@ -400,39 +400,6 @@ def scylla_or_charybdis(moves, n):
     return ns
 
 
-def __arithmetic_progression(seq):
-    """
-    26. Longest arithmetic progression
-    """
-    n = len(seq)
-    if n <= 2:
-        return seq
-
-    max_length = 2  # minimum length of an arithmetic progression
-    max_ap = seq[:2]  # initialize with the first two elements
-
-    for i in range(n):
-        for j in range(i + 1, n):
-            diff = seq[j] - seq[i]  # calculate the difference
-
-            # find the next elements in the arithmetic progression
-            curr_length = 2
-            next_element = seq[j] + diff
-            k = j + 1
-
-            while k < n:
-                if seq[k] == next_element:
-                    curr_length += 1
-                    next_element += diff
-                k += 1
-
-            # update the longest arithmetic progression if necessary
-            if curr_length > max_length:
-                max_length = curr_length
-                max_ap = seq[i:j+1]
-
-    return max_ap[0], max_ap[1]-max_ap[0],len(max_ap) 
-
 def arithmetic_progression(items):
     """
     26. Longest arithmetic progression
@@ -454,27 +421,6 @@ def arithmetic_progression(items):
                 n = count
     return  start, stride, n
 
-def arithmetic_progression_(items):
-    """
-    26. Longest arithmetic progression
-    """
-    record = {}
-    length = items[-1]
-    lst = [0]*length
-    for item in items:
-        lst[item-1] = 1
-        for start in items:
-            for stride in items[items.index(start):]:
-                if stride>start:
-                    prog = lst[start-1::stride-start]
-                    i=0
-                    while i < len(prog) and prog[i] == 1:
-                        i += 1
-                    if i not in record:
-                        record[i] = [(start,stride-start)]
-                    else:
-                        record[i].append((start,stride-start))
-    return record
 
 def tukeys_ninthers(items):
     """
