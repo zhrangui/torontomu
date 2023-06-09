@@ -64,6 +64,7 @@ def test_is_left_handed():
     assert not is_left_handed([1, 2, 4])
 
 
+
 def test_winning_card():
     assert winning_card([('two', 'hearts'), ('nine', 'spades'),
                          ('two', 'clubs'), ('ace', 'spades')], 'clubs') == ('two', 'clubs')
@@ -107,7 +108,9 @@ def test_scylla_or_charybdis():
 
 
 def test_arithmetic_progression():
-    assert arithmetic_progression([2, 4, 6, 7, 8, 12, 17]) == (2, 2, 4)
+    assert arithmetic_progression([2, 3, 7, 20, 25, 26, 28, 30, 32, 34, 36, 41, 53, 
+57, 73, 89, 94, 103, 105, 121, 137, 181, 186, 268, 
+278, 355, 370, 442, 462, 529, 554, 616, 646, 703]) == (7, 87, 9)
 
 
 def test_tukeys_ninthers():
