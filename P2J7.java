@@ -1,11 +1,9 @@
-import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.function.BiFunction;
 
 public class P2J7 {
     public static <T> List<T> josephus(List<T> men, int k) {
