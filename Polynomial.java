@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Polynomial {
+public class Polynomial implements Comparable<Polynomial> {
 
     private int[] coefficients;
 
@@ -57,5 +57,35 @@ public class Polynomial {
         }
 
         return new Polynomial(multResult);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Polynomial) {
+            return Arrays.equals(coefficients, ((Polynomial) other).coefficients);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(coefficients);
+    }
+
+    public int compareTo(Polynomial other) {
+        if (getDegree() > other.getDegree()) {
+            return 1;
+        } else if (other.getDegree() > getDegree()) {
+            return -1;
+        } else {
+            for (int i = coefficients.length - 1; i >= 0; --i) {
+                if (coefficients[i] > other.coefficients[i]) {
+                    return 1;
+                } else if (coefficients[i] < other.coefficients[i]) {
+                    return -1;
+                }
+            }
+        }
+        return 0;
     }
 }
