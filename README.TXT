@@ -21,6 +21,3 @@ Labs that pass the tester in more than 10 secs
 
 Labs completed with swing components
 15. Lab 5: Biticut Follies - Head
-
-## code
-throw new UnsupportedOperationException();
