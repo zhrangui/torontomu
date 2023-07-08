@@ -4,6 +4,19 @@ import java.util.TreeMap;
 public class Distance {
     private TreeMap<Integer, Integer> coeff = new TreeMap<>();
 
+    private Distance arithmetic(Distance other, boolean adding) {
+        TreeMap<Integer, Integer> arithm = new TreeMap<>(coeff);
+        for (Integer key : other.coeff.keySet()) {
+            int value = arithm.getOrDefault(key, 0);
+            if (adding) {
+                arithm.put(key, value + other.coeff.get(key));
+            } else {
+                arithm.put(key, value - other.coeff.get(key));
+            }
+        }
+        return new Distance(arithm);
+    }
+
     public static int extractSquares(int n) {
         int sqrt = (int) Math.sqrt(n);
         int factor = 1;
@@ -27,9 +40,28 @@ public class Distance {
         for (Integer key : coeff.keySet()) {
             int f = extractSquares(key);
             int k = key / (f * f);
-            int coef = this.coeff.getOrDefault(k, 0);
-            this.coeff.put(k, coef + coeff.get(key) * f);
+            int value = this.coeff.getOrDefault(k, 0);
+            this.coeff.put(k, value + coeff.get(key) * f);
         }
+    }
+
+    public Distance add(Distance other) {
+        return arithmetic(other, true);
+    }
+
+    public Distance subtract(Distance other) {
+        return arithmetic(other, false);
+    }
+
+    public Distance multiply(Distance other) {
+        TreeMap<Integer, Integer> mult = new TreeMap<>();
+        for (Integer key : coeff.keySet()) {
+            for (Integer otherKey : other.coeff.keySet()) {
+                int value = mult.getOrDefault(key * otherKey, 0);
+                mult.put(key * otherKey, value + coeff.get(key) * other.coeff.get(otherKey));
+            }
+        }
+        return new Distance(mult);
     }
 
     @Override
