@@ -1,4 +1,4 @@
-Total number of completed labs: 16
+Total number of completed labs: 18
 
 Labs that pass the tester in less than 10 secs
 1. Lab 0(A) - P2J1
@@ -13,11 +13,13 @@ Labs that pass the tester in less than 10 secs
 10. Lab 4: Extending An Existing Class - AccessCountArrayList<E>
 11. Lab 6: Text Files I - WordCount
 12. Lab 7: Text Files II - Tail
-13. Lab 15: Zeckendorf Encoding - Zeckendorf
-14. Lab 17: Diamond Sequence - DiamondSequence
-15. Lab 19: Symbolic Distances I - Distance
+13. Lab 10: Computation Streams - StreamExercises
+14. Lab 15: Zeckendorf Encoding - Zeckendorf
+15. Lab 17: Diamond Sequence - DiamondSequence
+16. Lab 19: Symbolic Distances I - Distance
+17. Lab 20: Symbolic Distances II - Distance
 
 Labs that pass the tester in more than 10 secs
 
 Labs completed with swing components
-15. Lab 5: Biticut Follies - Head
+18. Lab 5: Biticut Follies - Head
