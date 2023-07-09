@@ -40,8 +40,10 @@ public class Distance {
         for (Integer key : coeff.keySet()) {
             int f = extractSquares(key);
             int k = key / (f * f);
-            int value = this.coeff.getOrDefault(k, 0);
-            this.coeff.put(k, value + coeff.get(key) * f);
+            if (coeff.get(key) != 0) {
+                int value = this.coeff.getOrDefault(k, 0);
+                this.coeff.put(k, value + coeff.get(key) * f);
+            }
         }
     }
 
