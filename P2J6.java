@@ -5,21 +5,13 @@ import java.util.List;
 public class P2J6 {
 
     private static boolean sumOfDistinctCubes(int n, int c, LinkedList<Integer> soFar) {
-        int rest = n - c * c * c;
-        if (rest == 0) {
+        if (n == 0) {
             return true;
-        } else if (rest < 0) {
+        } else if (n < 0) {
             return false;
         }
-        int max = c-1;
-        int min = 0;
-        int sum = 0;
-        while ((sum + min * min * min) < rest) {
-            sum += min * min * min;
-            ++min;
-        }
-        for (int i = max; i >= min; --i) {
-            boolean isSuccess = sumOfDistinctCubes(rest, i, soFar);
+        for (int i = c; i > 0; --i) {
+            boolean isSuccess = sumOfDistinctCubes(n - i * i * i, i - 1, soFar);
             if (isSuccess) {
                 soFar.addFirst(i);
                 return isSuccess;
@@ -30,19 +22,9 @@ public class P2J6 {
 
     public static List<Integer> sumOfDistinctCubes(int n) {
         LinkedList<Integer> soFar = new LinkedList<>();
-        int max = (int) Math.cbrt(n);
-        int min = 0;
-        int sum = 0;
-        while ((sum + min * min * min) < n) {
-            sum += min * min * min;
-            ++min;
-        }
-
-        for (int c = max; c >= min; --c) {
-            if (sumOfDistinctCubes(n, c, soFar)) {
-                soFar.addFirst(c);
-                return soFar;
-            }
+        int c = (int) Math.cbrt(n);
+        if (sumOfDistinctCubes(n, c, soFar)) {
+            return soFar;
         }
         return new LinkedList<>();
     }
