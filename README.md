@@ -1,4 +1,4 @@
-Total number of completed labs: 19
+Total number of completed labs: 20
 
 Labs that pass the tester in less than 10 secs
 1. Lab 0(A) - P2J1
@@ -19,11 +19,12 @@ Labs that pass the tester in less than 10 secs
 16. Lab 17: Diamond Sequence - DiamondSequence
 17. Lab 19: Symbolic Distances I - Distance
 18. Lab 20: Symbolic Distances II - Distance
+19. Lab 25: Manhattan Skyline - Manhattan
 
 Labs that pass the tester in more than 10 secs
 
 Labs completed with swing components
-19. Lab 5: Biticut Follies - Head
+20. Lab 5: Biticut Follies - Head
 
 ## code
 throw new UnsupportedOperationException();
