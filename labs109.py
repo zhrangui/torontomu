@@ -1192,14 +1192,14 @@ def brangelina(first, second):
 
 def manhattan_skyline(towers):
     """
-    75. Manhattan skyline
+    75. Java Lab 25: Manhattan Skyline
     """
     pass
-
 
 def fibonacci_sum(n):
     """
     89. Fibonacci sum
+    Java Lab 0(E): All Integers Great And Small
     """
     pass
 
@@ -1207,5 +1207,6 @@ def fibonacci_sum(n):
 def sum_of_distinct_cubes(n):
     """
     99. Sum of distinct cubes
+    Java Lab 0(F): Two Branching Recursions
     """
     pass
