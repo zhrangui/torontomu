@@ -5,9 +5,9 @@ Labs that pass the tester in less than 10 secs
 2. Lab 0(B) - P2J2
 3. Lab 0(C) - P2J3
 4. Lab 0(E) - P2J5
+7. Lab 0(F) - P2J6
 5. Lab 0(G) - P2J7
 6. Lab 0(P) - P2J15
-7. Lab 0(F) - P2J6
 8. Lab 1: Polynomial I - Polynomial
 9. Lab 2: Polynomial II - Polynomial
 10. Lab 3: Polynomial III - Polynomial
