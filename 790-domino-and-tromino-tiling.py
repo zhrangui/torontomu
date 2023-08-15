@@ -1,4 +1,7 @@
 class Solution:
+    """
+    790. Domino and Tromino Tiling
+    """
     memo = {1:1,2:2,3:5}
     def numTilings(self, n: int) -> int:
         recur = self.memo.get(n)
