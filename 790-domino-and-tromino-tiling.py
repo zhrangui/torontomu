@@ -20,7 +20,6 @@ def test_solution():
     solution = Solution()
     assert solution.numTilings(3) == 5
 
-
 if __name__ == '__main__':
     import pytest
     pytest.main([__file__])
