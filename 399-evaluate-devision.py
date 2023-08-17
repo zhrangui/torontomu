@@ -1,6 +1,5 @@
 from typing import List
 
-
 class Solution:
     """
     399. Evaluate Division
