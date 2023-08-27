@@ -7,16 +7,12 @@ class Solution:
     """
 
     def change(self, amount: int, coins: List[int]) -> int:
-        if len(coins) == 1:
-            return 1 if amount % coins[0] == 0 else 0
-        else:
-            count = 0
-            last = 1
-            while coins[-1] * last <= amount:
-                count += self.change(amount - coins[-1]*last, coins[:-1])
-                last += 1
-            count += self.change(amount, coins[:-1])
-        return count
+        dp = [0] * (amount + 1)
+        dp[0] = 1
+        for coin in coins:
+            for j in range(coin, amount + 1):
+                dp[j] += dp[j-coin]
+        return dp[amount]
 
 
 def test_solution():
