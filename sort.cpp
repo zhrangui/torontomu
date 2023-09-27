@@ -84,7 +84,7 @@ void merge_sort(int *arr, int n)
 
 void merge_sel_sort(int *arr, int n)
 {
-    if (n < 6)
+    if (n <= 4)
     {
         selection_sort(arr, n);
     }
