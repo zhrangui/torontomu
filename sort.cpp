@@ -16,23 +16,19 @@
 void selection_sort(int *arr, int n)
 {
     int minIndex;
-    int min;
     for (int i = 0; i < n; i++)
     {
-        min = arr[i];
         minIndex = i;
         for (int j = i + 1; j < n; j++)
         {
-            if (arr[j] < min)
+            if (arr[j] < arr[minIndex])
             {
-                min = arr[j];
                 minIndex = j;
             }
         }
         if (minIndex != i)
         {
-            arr[minIndex] = arr[i];
-            arr[i] = min;
+            std::swap(arr[i], arr[minIndex]);
         }
     }
 }
@@ -84,7 +80,7 @@ void merge_sort(int *arr, int n)
 
 void merge_sel_sort(int *arr, int n)
 {
-    if (n <= 4)
+    if (n < 7)
     {
         selection_sort(arr, n);
     }
