@@ -25,17 +25,17 @@ int first_missing_iterative(const std::vector<int> &sorted_vec)
     return -1;
 }
 
-int _first_missing_dnc(const std::vector<int> &sorted_vec, int start, int end)
+int first_missing_dnc_divide_conquer(const std::vector<int> &sorted_vec, int start, int end)
 {
     if (end - start > 1)
     {
         int middle = (start + end) / 2;
-        int missing = _first_missing_dnc(sorted_vec, start, middle);
+        int missing = first_missing_dnc_divide_conquer(sorted_vec, start, middle);
         if (missing > 0)
         {
             return missing;
         }
-        missing = _first_missing_dnc(sorted_vec, middle, end);
+        missing = first_missing_dnc_divide_conquer(sorted_vec, middle, end);
         if (missing > 0)
         {
             return missing;
@@ -54,55 +54,68 @@ int _first_missing_dnc(const std::vector<int> &sorted_vec, int start, int end)
 int first_missing_dnc(const std::vector<int> &sorted_vec)
 {
     // Your code here
-    return _first_missing_dnc(sorted_vec, 0, sorted_vec.size());
+    return first_missing_dnc_divide_conquer(sorted_vec, 0, sorted_vec.size());
 }
 
-
+// Two nested loops, each one loops n elements, the time complexity equals n*n
+// then O(n^2)
 int count_inversions_iterative(const std::vector<int> &arr)
 {
     // Your code here
     int count = 0;
-    for (int i = 1; i < arr.size(); i++)
+    for (int i = 0; i < arr.size(); i++)
     {
-        if (arr[i - 1] > arr[i])
-        {
-            count++;
-        }
+        for (int j = i + 1; j < arr.size(); j++)
+            if (arr[i] > arr[j])
+            {
+                count++;
+            }
     }
     return count;
 }
 
-int _count_inversions_iterative(const std::vector<int> &arr, int start, int end)
+int count_inversions_dnc_divide_conquer(std::vector<int> &arr, int len, int middle)
 {
-    if (end - start > 1)
+    std::vector<int> arr_copy(arr.begin(), arr.begin() + len);
+    int count = 0;
+    if (len > 1)
     {
-        int middle = (start + end) / 2;
-        int count = _first_missing_dnc(arr, start, middle);
-
-        count += _first_missing_dnc(arr, middle, end);
-        return count;
     }
-    if (arr[start] > arr[start + 1])
-    {
-        return 1;
-    }
-    return 0;
+    return count;
+    ;
 }
 
 int count_inversions_dnc(const std::vector<int> &arr)
 {
     // Your code here
-    return _count_inversions_iterative(arr, 0, arr.size());
+    std::vector<int> arr_copy(arr);
+    return count_inversions_dnc_divide_conquer(arr_copy, arr_copy.size(), arr_copy.size() / 2);
 }
 
 int max_subarray_sum_iterative(const std::vector<int> &arr)
 {
     // Your code here
-    return -1;
+    int max = arr[0];
+    for (int i = 0; i < arr.size(); i++)
+    {
+        int total = arr[i];
+        for (int j = i + 1; j < arr.size(); j++) {
+            total += arr[j];
+            if (max < total) {
+                max = total;
+            }
+        }
+    }
+
+    return max;
+}
+
+int max_subarray_sum_dnc_divide_conquer(const std::vector<int> &arr, int start, int end) {
+    return -2;
 }
 
 int max_subarray_sum_dnc(const std::vector<int> &arr)
 {
     // Your code here
-    return -2;
+    return max_subarray_sum_dnc_divide_conquer(arr, 0, arr.size());
 }
