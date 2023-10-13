@@ -74,24 +74,59 @@ int count_inversions_iterative(const std::vector<int> &arr)
     return count;
 }
 
-int count_inversions_dnc_divide_conquer(std::vector<int> &arr, int len, int middle)
+int count_inversions_dnc_divide_conquer(std::vector<int> &arr, int start, int end)
 {
-    std::vector<int> arr_copy(arr.begin(), arr.begin() + len);
     int count = 0;
-    if (len > 1)
+    if (end - start > 1)
     {
+        int middle = (end + start) / 2;
+        int left = count_inversions_dnc_divide_conquer(arr, start, middle);
+        int right = count_inversions_dnc_divide_conquer(arr, middle, end);
+        count = left + right;
+        std::vector<int> arr_copy(arr.begin() + start, arr.begin() + end);
+        int j = 0;
+        int k = 0;
+        int m = middle - start;
+        for (int i = 0; i < end - start; i++)
+        {
+            if (j >= m)
+            {
+                arr[start + i] = arr_copy[m + k];
+                k++;
+            }
+            else if (k >= end - middle)
+            {
+                arr[start + i] = arr_copy[j];
+                j++;
+            }
+            else
+            {
+                if (arr_copy[j] <= arr_copy[m + k])
+                {
+                    arr[start + i] = arr_copy[j];
+                    j++;
+                }
+                else
+                {
+                    arr[start + i] = arr_copy[m + k];
+                    k++;
+                    count += m - j;
+                }
+            }
+        }
     }
     return count;
-    ;
 }
 
 int count_inversions_dnc(const std::vector<int> &arr)
 {
     // Your code here
     std::vector<int> arr_copy(arr);
-    return count_inversions_dnc_divide_conquer(arr_copy, arr_copy.size(), arr_copy.size() / 2);
+    return count_inversions_dnc_divide_conquer(arr_copy, 0, arr_copy.size());
 }
 
+// Two nested loop with n iterarion, n x n=n^2
+// O(n^2)
 int max_subarray_sum_iterative(const std::vector<int> &arr)
 {
     // Your code here
@@ -99,9 +134,11 @@ int max_subarray_sum_iterative(const std::vector<int> &arr)
     for (int i = 0; i < arr.size(); i++)
     {
         int total = arr[i];
-        for (int j = i + 1; j < arr.size(); j++) {
+        for (int j = i + 1; j < arr.size(); j++)
+        {
             total += arr[j];
-            if (max < total) {
+            if (max < total)
+            {
                 max = total;
             }
         }
@@ -110,10 +147,38 @@ int max_subarray_sum_iterative(const std::vector<int> &arr)
     return max;
 }
 
-int max_subarray_sum_dnc_divide_conquer(const std::vector<int> &arr, int start, int end) {
-    return -2;
+int max_subarray_sum_dnc_divide_conquer(const std::vector<int> &arr, int start, int end)
+{
+    if (end - start < 2)
+    {
+        return arr[start];
+    }
+    int middle = (end + start) / 2;
+    int left = max_subarray_sum_dnc_divide_conquer(arr, start, middle);
+    int right = max_subarray_sum_dnc_divide_conquer(arr, middle, end);
+    int max_middle = arr[middle - 1] + arr[middle];
+    int total = max_middle;
+    for (int i = middle - 2; i >= start; i--)
+    {
+        total += arr[i];
+        if (total > max_middle)
+        {
+            max_middle = total;
+        }
+    }
+    total = max_middle;
+    for (int i = middle + 1; i < end; i++)
+    {
+        total += arr[i];
+        if (total > max_middle)
+        {
+            max_middle = total;
+        }
+    }
+    return std::max(std::max(left, right), max_middle);
 }
-
+// T(n) = 2T(n/2) + O(n)
+// O(nlog(n))
 int max_subarray_sum_dnc(const std::vector<int> &arr)
 {
     // Your code here
