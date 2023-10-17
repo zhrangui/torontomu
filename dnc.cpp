@@ -91,7 +91,7 @@ int count_inversions_dnc_divide_conquer(std::vector<int> &arr, int start, int en
         {
             if (j >= m)
             {
-                arr[start + i] = arr_copy[m + k];
+                arr[start + i] = arr_copy[m + k];//
                 k++;
             }
             else if (k >= end - middle)
@@ -118,6 +118,11 @@ int count_inversions_dnc_divide_conquer(std::vector<int> &arr, int start, int en
     return count;
 }
 
+// Each array is split into two substrings and recursive function call for each substring. Each  separate operations run 
+// in constant time
+// T(n) = 2T(n/2) + O(1)
+// according to master theory
+// T(n) = nlog(n)
 int count_inversions_dnc(const std::vector<int> &arr)
 {
     // Your code here
@@ -177,8 +182,12 @@ int max_subarray_sum_dnc_divide_conquer(const std::vector<int> &arr, int start, 
     }
     return std::max(std::max(left, right), max_middle);
 }
+
+// Each array is split into two array, and each subarray recursively calls function, time complexity is T(n) = 2T(n/a)
+// and each function all execute n loop to find maximum sum the time complexity is O(n), which adds to each spliting. 
 // T(n) = 2T(n/2) + O(n)
-// O(nlog(n))
+// according to master theory
+// T(n) = O(nlog(n))
 int max_subarray_sum_dnc(const std::vector<int> &arr)
 {
     // Your code here
