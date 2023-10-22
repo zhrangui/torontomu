@@ -80,12 +80,10 @@ void merge_sort(int *arr, int n)
 
 void merge_sel_sort(int *arr, int n)
 {
-    if (n < 7)
-    {
-        selection_sort(arr, n);
-    }
-    else
-    {
-        merge_sort(arr, n);
-    }
+    if (n <= 7)
+        return selection_sort(arr, n);
+    int m = n / 2;
+    merge_sel_sort(arr, m);
+    merge_sel_sort(arr + m, n - m);
+    merge(arr, n, m);
 }
