@@ -12,7 +12,7 @@
                 "dnc.cpp",
                 "lab2.cpp",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/lab2"
             ],
             "options": {
                 "cwd": "${fileDirname}"

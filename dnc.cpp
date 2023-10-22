@@ -30,15 +30,13 @@ int first_missing_dnc_divide_conquer(const std::vector<int> &sorted_vec, int sta
     if (end - start > 1)
     {
         int middle = (start + end) / 2;
-        int missing = first_missing_dnc_divide_conquer(sorted_vec, start, middle);
-        if (missing > 0)
+        if (sorted_vec[middle] > sorted_vec[0] + middle)
         {
-            return missing;
+            return first_missing_dnc_divide_conquer(sorted_vec, start, middle);
         }
-        missing = first_missing_dnc_divide_conquer(sorted_vec, middle, end);
-        if (missing > 0)
+        else
         {
-            return missing;
+            return first_missing_dnc_divide_conquer(sorted_vec, middle, end);
         }
     }
     if (sorted_vec[start] + 1 != sorted_vec[start + 1])
@@ -49,15 +47,18 @@ int first_missing_dnc_divide_conquer(const std::vector<int> &sorted_vec, int sta
 }
 
 // Each loop divides into 2 subproblem with n/2 elements, and has one comparison which is O(1)
-// T(n) = 2T(n/2) + O(1), there is lg(n) recursive calls
-// T(n) = lg(n)
+// T(n) = T(n/2) + O(1) in each recursive call, there is log(n) recursive calls
+// according to master theory
+// T(n) = log(n)*n^log2(1)
+// T(n) = log(n)*n^0
+// T(n) = log(n)
 int first_missing_dnc(const std::vector<int> &sorted_vec)
 {
     // Your code here
     return first_missing_dnc_divide_conquer(sorted_vec, 0, sorted_vec.size());
 }
 
-// Two nested loops, each one loops n elements, the time complexity equals n*n
+// Bruce force method with two nested loops, each one loops n elements, the time complexity equals n*n
 // then O(n^2)
 int count_inversions_iterative(const std::vector<int> &arr)
 {
@@ -91,7 +92,7 @@ int count_inversions_dnc_divide_conquer(std::vector<int> &arr, int start, int en
         {
             if (j >= m)
             {
-                arr[start + i] = arr_copy[m + k];//
+                arr[start + i] = arr_copy[m + k]; //
                 k++;
             }
             else if (k >= end - middle)
@@ -118,11 +119,13 @@ int count_inversions_dnc_divide_conquer(std::vector<int> &arr, int start, int en
     return count;
 }
 
-// Each array is split into two substrings and recursive function call for each substring. Each  separate operations run 
-// in constant time
-// T(n) = 2T(n/2) + O(1)
+// Each array is split into two substrings and recursive function call for each substring. Each separate operations run
+// in n loop 
+// T(n) = 2T(n/2) + O(n)
 // according to master theory
+// T(n) = n^(log2(2))*log(n)
 // T(n) = nlog(n)
+// T(n) = O(nlog(n))
 int count_inversions_dnc(const std::vector<int> &arr)
 {
     // Your code here
@@ -130,7 +133,7 @@ int count_inversions_dnc(const std::vector<int> &arr)
     return count_inversions_dnc_divide_conquer(arr_copy, 0, arr_copy.size());
 }
 
-// Two nested loop with n iterarion, n x n=n^2
+// Bruce force method with two nested loops with n iterarion, n x n=n^2
 // O(n^2)
 int max_subarray_sum_iterative(const std::vector<int> &arr)
 {
@@ -183,10 +186,12 @@ int max_subarray_sum_dnc_divide_conquer(const std::vector<int> &arr, int start, 
     return std::max(std::max(left, right), max_middle);
 }
 
-// Each array is split into two array, and each subarray recursively calls function, time complexity is T(n) = 2T(n/a)
-// and each function all execute n loop to find maximum sum the time complexity is O(n), which adds to each spliting. 
+// Each array is split into two array, and each subarray recursively calls function, time complexity is T(n) = 2T(n/2)
+// and each function executes n loop to find maximum sum the time complexity is O(n), which adds to each recursive call.
 // T(n) = 2T(n/2) + O(n)
 // according to master theory
+// T(n) = n^(log2(2))*log(n)
+// T(n) = nlog(n)
 // T(n) = O(nlog(n))
 int max_subarray_sum_dnc(const std::vector<int> &arr)
 {
