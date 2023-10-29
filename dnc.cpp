@@ -11,7 +11,7 @@
 // You might find it useful to overload and
 // pass additional arguments, for example.
 // Linear search loops on n elements, so the time complexity is n
-// equals O(n)
+// equals T(n)=O(n)
 int first_missing_iterative(const std::vector<int> &sorted_vec)
 {
     // Your code here
@@ -46,7 +46,8 @@ int first_missing_dnc_divide_conquer(const std::vector<int> &sorted_vec, int sta
     return -2;
 }
 
-// Each loop divides into 2 subproblem with n/2 elements, and has one comparison which is O(1)
+// Each loop divides into 2 subproblem with n/2 elements, and has one comparison which is O(1), 
+// and only recursively calls one branch, subproblem, then,
 // T(n) = T(n/2) + O(1) in each recursive call, there is log(n) recursive calls
 // according to master theory
 // T(n) = log(n)*n^log2(1)
@@ -59,7 +60,7 @@ int first_missing_dnc(const std::vector<int> &sorted_vec)
 }
 
 // Bruce force method with two nested loops, each one loops n elements, the time complexity equals n*n
-// then O(n^2)
+// then T(n)=OO(n^2)
 int count_inversions_iterative(const std::vector<int> &arr)
 {
     // Your code here
@@ -134,7 +135,7 @@ int count_inversions_dnc(const std::vector<int> &arr)
 }
 
 // Bruce force method with two nested loops with n iterarion, n x n=n^2
-// O(n^2)
+// T(n)=O(n^2)
 int max_subarray_sum_iterative(const std::vector<int> &arr)
 {
     // Your code here
