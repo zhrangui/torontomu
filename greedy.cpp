@@ -13,7 +13,8 @@ int schedule_processes(int nCPU, vector<int> run_times)
 {
     std::vector<int> wait_times;
     std::vector<int> current_time;
-    for (int i = 0; i <= nCPU; ++i) {
+    for (int i = 0; i <= nCPU; ++i)
+    {
         wait_times.push_back(0);
         current_time.push_back(0);
     }
@@ -42,6 +43,11 @@ int schedule_processes(int nCPU, vector<int> run_times)
     return total;
 }
 
+bool ascendingComparator(pair<int, int> first, pair<int, int> second)
+{
+    return first.second < second.second;
+}
+
 void schedule_rooms(int nRooms, vector<pair<int, int>> &roomReqs, vector<pair<int, int>> schedule[])
 {
     /**************** YOUR CODE HERE! ***********************************/
@@ -53,4 +59,33 @@ void schedule_rooms(int nRooms, vector<pair<int, int>> &roomReqs, vector<pair<in
     /* Bookings placed in room #1 should be placed in schedule[1], etc. */
     /* Use schedule[0] to store requests that cannot be accommodated.   */
     /********************************************************************/
+    std::sort(roomReqs.begin(), roomReqs.end(), ascendingComparator);
+
+    for (pair<int, int> req : roomReqs)
+    {
+        bool selected = false;
+        for (int i = 1; i <= nRooms; i++)
+        {
+            if (schedule[i].empty())
+            {
+                schedule[i].push_back(req);
+                selected = true;
+                break;
+            }
+            else
+            {
+                pair<int, int> last = schedule[i].back();
+                if (last.second <= req.first)
+                {
+                    schedule[i].push_back(req);
+                    selected = true;
+                    break;
+                }
+            }
+        }
+        if (!selected)
+        {
+            schedule[0].push_back(req);
+        }
+    }
 }
