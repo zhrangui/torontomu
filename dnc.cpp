@@ -1,6 +1,7 @@
 /*
     Fill in this block comment before submitting.
-    Name: <your name here>
+    Name: Rui Zhang
+    No: 500536315
 */
 
 #include <iostream>
