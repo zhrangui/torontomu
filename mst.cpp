@@ -54,6 +54,13 @@ void minimumSpanningTree(int **graph, int **mst, int V)
     vector<int> distance(V, -1);
     vector<int> parent(V, -1);
 
+    for (int i = 0; i < V; i++)
+    {
+        visited[i] = false;
+        distance[i] = -1;
+        parent[i] = -1;
+    }
+
     vector<vector<int>> adj;
     for (int i = 0; i < V; i++)
     {
