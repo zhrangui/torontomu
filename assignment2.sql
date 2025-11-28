@@ -95,9 +95,9 @@ CREATE TABLE Counsellor (
     co_ID NUMBER(10),
     co_fname VARCHAR2(20) NOT NULL,
     co_lname VARCHAR2(20) NOT NULL,
-    addr_ID NUMBER(10) NOT NULL,
+    address_ID NUMBER(10) NOT NULL,
     CONSTRAINT counsellors_pk PRIMARY KEY (co_ID),
-    CONSTRAINT counsellors_address_fk FOREIGN KEY (addr_ID) REFERENCES Address(addr_ID)
+    CONSTRAINT counsellors_address_fk FOREIGN KEY (address_ID) REFERENCES Address(addr_ID)
 );
 
 CREATE TABLE Badge (
@@ -293,31 +293,31 @@ INSERT INTO Activity (activity_ID, activity_name, age_requirement, participant_l
 INSERT INTO Activity (activity_ID, activity_name, age_requirement, participant_limit, badge_name) VALUES (4025, 'Skateboard Tricks', '10+', 15, 'Dance');
 
 -- ==================== COUNSELLORS (25 rows) ====================
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5001, 'David', 'Brown', 1001);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5002, 'Emily', 'White', 1002);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5003, 'Frank', 'Johnson', 1003);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5004, 'Grace', 'Miller', 1004);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5005, 'Henry', 'Davis', 1005);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5006, 'Iris', 'Martinez', 1006);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5007, 'James', 'Garcia', 1007);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5008, 'Karen', 'Rodriguez', 1008);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5009, 'Leo', 'Wilson', 1009);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5010, 'Mary', 'Anderson', 1010);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5011, 'Nathan', 'Taylor', 1011);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5012, 'Olivia', 'Thomas', 1012);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5013, 'Paul', 'Jackson', 1013);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5014, 'Quinn', 'White', 1014);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5015, 'Rachel', 'Harris', 1015);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5016, 'Steven', 'Martin', 1016);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5017, 'Tina', 'Lee', 1017);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5018, 'Uma', 'Perez', 1018);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5019, 'Victor', 'Thompson', 1019);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5020, 'Wendy', 'Clark', 1020);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5021, 'Xavier', 'Ramirez', 1021);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5022, 'Yara', 'Sanchez', 1022);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5023, 'Zachary', 'Morris', 1023);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5024, 'Amber', 'Rogers', 1024);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, addr_ID) VALUES (5025, 'Brandon', 'Reed', 1025);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5001, 'David', 'Brown', 1001);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5002, 'Emily', 'White', 1002);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5003, 'Frank', 'Johnson', 1003);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5004, 'Grace', 'Miller', 1004);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5005, 'Henry', 'Davis', 1005);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5006, 'Iris', 'Martinez', 1006);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5007, 'James', 'Garcia', 1007);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5008, 'Karen', 'Rodriguez', 1008);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5009, 'Leo', 'Wilson', 1009);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5010, 'Mary', 'Anderson', 1010);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5011, 'Nathan', 'Taylor', 1011);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5012, 'Olivia', 'Thomas', 1012);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5013, 'Paul', 'Jackson', 1013);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5014, 'Quinn', 'White', 1014);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5015, 'Rachel', 'Harris', 1015);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5016, 'Steven', 'Martin', 1016);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5017, 'Tina', 'Lee', 1017);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5018, 'Uma', 'Perez', 1018);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5019, 'Victor', 'Thompson', 1019);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5020, 'Wendy', 'Clark', 1020);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5021, 'Xavier', 'Ramirez', 1021);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5022, 'Yara', 'Sanchez', 1022);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5023, 'Zachary', 'Morris', 1023);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5024, 'Amber', 'Rogers', 1024);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5025, 'Brandon', 'Reed', 1025);
 
 -- ==================== CAMPERS (25 rows) ====================
 INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6001, 'Sam', 'Lee', 1001, 10, 3001);
@@ -454,102 +454,3 @@ INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6022, 'Hike', 7022
 INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6023, 'Music', 7023);
 INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6024, 'Swim', 7024);
 INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6025, 'Dance', 7025);
-
-
--- Create a report that lists the number of times each camper did an activity with a counsellor 
--- (GROUP)
-
--- Camper         Counsellor      # Occurences 
--- Timmy           Joe                 3 
--- Timmy           Sam               1 
--- Sally             Joe                 2
-SELECT
-    c.cam_fname AS Camper,
-    co.co_fname AS Counsellor,
-    a.activity_name AS Activity,
-    COUNT(*) AS Occurrences
-FROM
-    Camper c
-    JOIN Registration r ON r.cam_id = c.cam_id
-    JOIN Event e on e.event_id = r.event_id
-    JOIN Counsellor co ON co.co_id= e.co_id
-    JOIN Activity a ON a.activity_id = e.activity_id
-GROUP BY
-    c.cam_fname,
-    co.co_fname,
-    a.activity_name;
-
--- List the number of each badge that was earned - the camp director needs to know how many of each badge to bring to the closing ceremonies 
--- BadgeName	Count
-
--- First_Aid	7 
--- Fire_Starter	3 
--- Water_Safety	10
-SELECT
-    b.badge_name AS BadgeName,
-    COUNT(*) AS Count
-FROM
-    Badge b
-    JOIN Collection c ON c.badge_name = b.badge_name
-GROUP BY
-    b.badge_name;
-
--- For a given camper, display the names of each badge, the name of the activity they earned it from, and the date of the event. (complex joining between camper, collection, event, and activity) 
-
--- BadgeName		ActivityName		Date 
--- First_Aid		Morning Hike		2025-07-03 
--- Water_Safety		Canoe			2025-07-04
-SELECT
-    b.badge_name AS BadgeName,
-    a.activity_name AS ActivityName,
-    e.event_date AS "Date"
-FROM
-    Camper c
-    JOIN Collection col ON col.cam_id = c.cam_id
-    JOIN Event e ON e.event_id = col.event_id
-    JOIN Activity a ON a.activity_id = e.activity_id
-    JOIN Badge b ON b.badge_name = col.badge_name;
-
--- Determine which event(s) had the most campers attend. Which event(s) had the least campers attend? (count # of entries in REGISTRATION table, grouping by event_id → get corresponding name from EVENT table) 
-
--- EventName		# Participants 
--- Water Polo		14 
--- EventName		# Participants 
--- Arts & Crafts		2 
-SELECT
-    a.activity_name AS EventName,
-    COUNT(r.cam_id) AS "# Participants"
-FROM
-    Registration r
-    JOIN Event e ON e.event_id = r.event_id
-    JOIN Activity a ON a.activity_id = e.activity_id
-GROUP BY
-    e.event_id,
-    a.activity_name
-ORDER BY
-    "# Participants" DESC;
-
--- Create a mailing list for all the people involved with camp. Only need to send a letter to unique addresses (UNION between campers and counsellors, unique addresses)
-SELECT DISTINCT * 
-FROM (SELECT
-    cam_fname AS FirstName,
-    cam_lname AS LastName,
-    city AS City,
-    province AS Province,
-    postal_code AS "Postal Code"
-FROM
-    Camper c
-    JOIN Address a
-    ON c.address_id = a.addr_id
-UNION
-SELECT
-    co_fname AS FirstName,
-    co_lname AS LastName,
-    city AS City,
-    province AS Province,
-    postal_code AS "Postal Code"
-FROM
-    Counsellor co
-    JOIN Address a
-    ON co.addr_id = a.addr_id)
-ORDER BY FirstName, LastName; 
