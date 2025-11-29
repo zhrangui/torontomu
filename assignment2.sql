@@ -66,9 +66,6 @@ END;
 /
 
 -- ==================== CREATE TABLES ====================
-
-
-
 CREATE TABLE Address (
     addr_ID NUMBER(10),
     st_no VARCHAR2(50) NOT NULL,
@@ -76,7 +73,7 @@ CREATE TABLE Address (
     city VARCHAR2(30),
     province VARCHAR2(30),
     postal_code VARCHAR2(10),
-    CONSTRAINT Address2_pk PRIMARY KEY (addr_ID)
+    CONSTRAINT address_pk PRIMARY KEY (addr_ID)
 );
 
 CREATE TABLE Locations (
@@ -98,9 +95,9 @@ CREATE TABLE Counsellor (
     co_ID NUMBER(10),
     co_fname VARCHAR2(20) NOT NULL,
     co_lname VARCHAR2(20) NOT NULL,
-    Address_ID NUMBER(10) NOT NULL,
+    address_ID NUMBER(10) NOT NULL,
     CONSTRAINT counsellors_pk PRIMARY KEY (co_ID),
-    CONSTRAINT counsellors_Address_fk FOREIGN KEY (Address_ID) REFERENCES Address(addr_ID)
+    CONSTRAINT counsellors_address_fk FOREIGN KEY (address_ID) REFERENCES Address(addr_ID)
 );
 
 CREATE TABLE Badge (
@@ -134,11 +131,11 @@ CREATE TABLE Camper (
     cam_ID NUMBER(10),
     cam_fname VARCHAR2(20) NOT NULL,
     cam_lname VARCHAR2(20) NOT NULL,
-    Address2_ID NUMBER(10) NOT NULL,
+    address_ID NUMBER(10) NOT NULL,
     cam_age NUMBER(3) NOT NULL,
     gu_ID NUMBER(10) NOT NULL,
     CONSTRAINT campers_pk PRIMARY KEY (cam_ID),
-    CONSTRAINT campers_Address2_fk FOREIGN KEY (Address2_ID) REFERENCES Address2(addr_ID),
+    CONSTRAINT campers_address_fk FOREIGN KEY (address_ID) REFERENCES Address(addr_ID),
     CONSTRAINT campers_gu_fk FOREIGN KEY (gu_ID) REFERENCES Guardian(gu_ID)
 );
 
@@ -174,7 +171,8 @@ CREATE TABLE Collection (
     CONSTRAINT collection_event_fk FOREIGN KEY (event_ID) REFERENCES Event(event_ID)
 );
 
--- ==================== Address (25 rows) ====================
+
+-- ==================== ADDRESS (25 rows) ====================
 INSERT INTO Address (addr_ID, st_no, st_name, city, province, postal_code) VALUES (1001, '123', 'Maple Ave', 'Toronto', 'ON', 'M1A1A1');
 INSERT INTO Address (addr_ID, st_no, st_name, city, province, postal_code) VALUES (1002, '456', 'Oak St', 'North York', 'ON', 'M2B2B2');
 INSERT INTO Address (addr_ID, st_no, st_name, city, province, postal_code) VALUES (1003, '789', 'Pine Rd', 'Scarborough', 'ON', 'M3C3C3');
@@ -200,6 +198,7 @@ INSERT INTO Address (addr_ID, st_no, st_name, city, province, postal_code) VALUE
 INSERT INTO Address (addr_ID, st_no, st_name, city, province, postal_code) VALUES (1023, '2020', 'Redbud Blvd', 'Sharon', 'ON', 'L0G1A1');
 INSERT INTO Address (addr_ID, st_no, st_name, city, province, postal_code) VALUES (1024, '2121', 'Magnolia Ave', 'Sutton', 'ON', 'L0E1R0');
 INSERT INTO Address (addr_ID, st_no, st_name, city, province, postal_code) VALUES (1025, '2222', 'Dogwood Dr', 'Javelin Lake', 'ON', 'L0E1S0');
+
 -- ==================== LOCATIONS (25 rows) ====================
 INSERT INTO Locations (location_ID, location_name) VALUES (2001, 'Main Hall');
 INSERT INTO Locations (location_ID, location_name) VALUES (2002, 'Lakeside Field');
@@ -284,73 +283,72 @@ INSERT INTO Activity (activity_ID, activity_name, age_requirement, participant_l
 INSERT INTO Activity (activity_ID, activity_name, age_requirement, participant_limit, badge_name) VALUES (4012, 'Volleyball League', '9+', 20, 'Soccer');
 
 -- ==================== COUNSELLORS (25 rows) ====================
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5001, 'David', 'Brown', 1001);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5002, 'Emily', 'White', 1002);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5003, 'Frank', 'Johnson', 1003);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5004, 'Grace', 'Miller', 1004);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5005, 'Henry', 'Davis', 1005);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5006, 'Iris', 'Martinez', 1006);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5007, 'James', 'Garcia', 1007);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5008, 'Karen', 'Rodriguez', 1008);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5009, 'Leo', 'Wilson', 1009);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5010, 'Mary', 'Anderson', 1010);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5011, 'Nathan', 'Taylor', 1011);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5012, 'Olivia', 'Thomas', 1012);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5013, 'Paul', 'Jackson', 1013);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5014, 'Quinn', 'White', 1014);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5015, 'Rachel', 'Harris', 1015);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5016, 'Steven', 'Martin', 1016);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5017, 'Tina', 'Lee', 1017);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5018, 'Uma', 'Perez', 1018);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5019, 'Victor', 'Thompson', 1019);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5020, 'Wendy', 'Clark', 1020);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5021, 'Xavier', 'Ramirez', 1021);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5022, 'Yara', 'Sanchez', 1022);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5023, 'Zachary', 'Morris', 1023);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5024, 'Amber', 'Rogers', 1024);
-INSERT INTO Counsellor (co_ID, co_fname, co_lname, Address_ID) VALUES (5025, 'Brandon', 'Reed', 1025);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5001, 'David', 'Brown', 1001);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5002, 'Emily', 'White', 1002);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5003, 'Frank', 'Johnson', 1003);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5004, 'Grace', 'Miller', 1004);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5005, 'Henry', 'Davis', 1005);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5006, 'Iris', 'Martinez', 1006);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5007, 'James', 'Garcia', 1007);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5008, 'Karen', 'Rodriguez', 1008);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5009, 'Leo', 'Wilson', 1009);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5010, 'Mary', 'Anderson', 1010);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5011, 'Nathan', 'Taylor', 1011);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5012, 'Olivia', 'Thomas', 1012);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5013, 'Paul', 'Jackson', 1013);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5014, 'Quinn', 'White', 1014);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5015, 'Rachel', 'Harris', 1015);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5016, 'Steven', 'Martin', 1016);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5017, 'Tina', 'Lee', 1017);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5018, 'Uma', 'Perez', 1018);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5019, 'Victor', 'Thompson', 1019);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5020, 'Wendy', 'Clark', 1020);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5021, 'Xavier', 'Ramirez', 1021);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5022, 'Yara', 'Sanchez', 1022);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5023, 'Zachary', 'Morris', 1023);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5024, 'Amber', 'Rogers', 1024);
+INSERT INTO Counsellor (co_ID, co_fname, co_lname, address_ID) VALUES (5025, 'Brandon', 'Reed', 1025);
 
 -- ==================== CAMPERS (25 rows) ====================
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6001, 'Sam', 'Lee', 1001, 10, 3001);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6002, 'Maya', 'Patel', 1002, 8, 3002);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6003, 'Liam', 'O''Connor', 1003, 12, 3003);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6004, 'Sophia', 'Kumar', 1004, 9, 3004);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6005, 'Noah', 'Lopez', 1005, 11, 3005);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6006, 'Emma', 'Chen', 1006, 7, 3006);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6007, 'Jacob', 'Patel', 1007, 10, 3007);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6008, 'Olivia', 'Anderson', 1008, 13, 3008);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6009, 'Mason', 'Taylor', 1009, 8, 3009);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6010, 'Isabella', 'Martinez', 1010, 11, 3010);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6011, 'Ethan', 'Wilson', 1011, 9, 3011);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6012, 'Ava', 'Brown', 1012, 10, 3012);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6013, 'Lucas', 'Garcia', 1013, 12, 3013);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6014, 'Mia', 'Rodriguez', 1014, 8, 3014);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6015, 'Logan', 'Jones', 1015, 11, 3015);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6016, 'Charlotte', 'White', 1016, 9, 3016);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6017, 'Aiden', 'Harris', 1017, 10, 3017);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6018, 'Amelia', 'Lewis', 1018, 7, 3018);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6019, 'Benjamin', 'Walker', 1019, 12, 3019);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6020, 'Harper', 'Hall', 1020, 8, 3020);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6021, 'Michael', 'Young', 1021, 11, 3021);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6022, 'Evelyn', 'King', 1022, 9, 3022);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6023, 'Alexander', 'Scott', 1023, 10, 3023);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6024, 'Abigail', 'Green', 1024, 13, 3024);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, Address2_ID, cam_age, gu_ID) VALUES (6025, 'Daniel', 'Adams', 1025, 8, 3025);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6001, 'Sam', 'Lee', 1001, 10, 3001);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6002, 'Maya', 'Patel', 1002, 8, 3002);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6003, 'Liam', 'O''Connor', 1003, 12, 3003);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6004, 'Sophia', 'Kumar', 1004, 9, 3004);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6005, 'Noah', 'Lopez', 1005, 11, 3005);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6006, 'Emma', 'Chen', 1006, 7, 3006);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6007, 'Jacob', 'Patel', 1007, 10, 3007);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6008, 'Olivia', 'Anderson', 1008, 13, 3008);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6009, 'Mason', 'Taylor', 1009, 8, 3009);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6010, 'Isabella', 'Martinez', 1010, 11, 3010);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6011, 'Ethan', 'Wilson', 1011, 9, 3011);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6012, 'Ava', 'Brown', 1012, 10, 3012);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6013, 'Lucas', 'Garcia', 1013, 12, 3013);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6014, 'Mia', 'Rodriguez', 1014, 8, 3014);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6015, 'Logan', 'Jones', 1015, 11, 3015);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6016, 'Charlotte', 'White', 1016, 9, 3016);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6017, 'Aiden', 'Harris', 1017, 10, 3017);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6018, 'Amelia', 'Lewis', 1018, 7, 3018);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6019, 'Benjamin', 'Walker', 1019, 12, 3019);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6020, 'Harper', 'Hall', 1020, 8, 3020);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6021, 'Michael', 'Young', 1021, 11, 3021);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6022, 'Evelyn', 'King', 1022, 9, 3022);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6023, 'Alexander', 'Scott', 1023, 10, 3023);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6024, 'Abigail', 'Green', 1024, 13, 3024);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6025, 'Daniel', 'Adams', 1025, 8, 3025);
 
 -- ==================== EVENTS (13 rows) ====================
 INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7001, 5001, 4001, 2001, DATE '2025-07-01', TIMESTAMP '2025-07-01 09:00:00', INTERVAL '0 01:30:00' DAY TO SECOND);
-INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7002, 5002, 4002, 2002, DATE '2025-07-01', TIMESTAMP '2025-07-01 11:00:00', INTERVAL '0 02:00:00' DAY TO SECOND);
-INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7003, 5003, 4003, 2003, DATE '2025-07-02', TIMESTAMP '2025-07-02 14:30:00', INTERVAL '0 01:00:00' DAY TO SECOND);
+INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7002, 5002, 4001, 2001, DATE '2025-07-01', TIMESTAMP '2025-07-01 11:00:00', INTERVAL '0 02:00:00' DAY TO SECOND);
+INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7003, 5003, 4001, 2003, DATE '2025-07-02', TIMESTAMP '2025-07-02 14:30:00', INTERVAL '0 01:00:00' DAY TO SECOND);
 INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7004, 5004, 4004, 2004, DATE '2025-07-03', TIMESTAMP '2025-07-03 10:00:00', INTERVAL '0 02:30:00' DAY TO SECOND);
-INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7005, 5005, 4005, 2005, DATE '2025-07-04', TIMESTAMP '2025-07-04 13:00:00', INTERVAL '0 02:00:00' DAY TO SECOND);
-INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7006, 5006, 4006, 2006, DATE '2025-07-05', TIMESTAMP '2025-07-05 15:00:00', INTERVAL '0 01:45:00' DAY TO SECOND);
-INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7007, 5007, 4007, 2007, DATE '2025-07-06', TIMESTAMP '2025-07-06 09:30:00', INTERVAL '0 02:00:00' DAY TO SECOND);
-INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7008, 5008, 4008, 2008, DATE '2025-07-07', TIMESTAMP '2025-07-07 16:00:00', INTERVAL '0 01:30:00' DAY TO SECOND);
-INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7009, 5009, 4009, 2009, DATE '2025-07-08', TIMESTAMP '2025-07-08 10:00:00', INTERVAL '0 02:00:00' DAY TO SECOND);
+INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7005, 5005, 4004, 2004, DATE '2025-07-04', TIMESTAMP '2025-07-04 13:00:00', INTERVAL '0 02:00:00' DAY TO SECOND);
+INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7006, 5006, 4004, 2006, DATE '2025-07-05', TIMESTAMP '2025-07-05 15:00:00', INTERVAL '0 01:45:00' DAY TO SECOND);
+INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7007, 5007, 4004, 2007, DATE '2025-07-06', TIMESTAMP '2025-07-06 09:30:00', INTERVAL '0 02:00:00' DAY TO SECOND);
+INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7008, 5008, 4004, 2004, DATE '2025-07-07', TIMESTAMP '2025-07-07 16:00:00', INTERVAL '0 01:30:00' DAY TO SECOND);
+INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7009, 5009, 4010, 2010, DATE '2025-07-08', TIMESTAMP '2025-07-08 10:00:00', INTERVAL '0 02:00:00' DAY TO SECOND);
 INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7010, 5010, 4010, 2010, DATE '2025-07-09', TIMESTAMP '2025-07-09 11:00:00', INTERVAL '0 02:30:00' DAY TO SECOND);
 INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7011, 5011, 4011, 2011, DATE '2025-07-10', TIMESTAMP '2025-07-10 14:00:00', INTERVAL '0 03:00:00' DAY TO SECOND);
-INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7012, 5012, 4012, 2012, DATE '2025-07-11', TIMESTAMP '2025-07-11 09:00:00', INTERVAL '0 02:30:00' DAY TO SECOND);
-
+INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7012, 5012, 4010, 2010, DATE '2025-07-11', TIMESTAMP '2025-07-11 09:00:00', INTERVAL '0 02:30:00' DAY TO SECOND);
 INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7026, 5010, 4011, 2011, DATE '2025-07-03', TIMESTAMP '2025-07-09 11:00:00', INTERVAL '0 02:30:00' DAY TO SECOND); --ADDED
 
 
@@ -409,7 +407,7 @@ INSERT INTO Registration (cam_ID, event_ID) VALUES (6015, 7008); -- Logan joins 
 INSERT INTO Registration (cam_ID, event_ID) VALUES (6020, 7008); -- Harper also joins dance
 INSERT INTO Registration (cam_ID, event_ID) VALUES (6024, 7008); -- Abigail also joins dance
 
--- ==================== COLLECTIONS (14 rows) ====================
+-- ==================== COLLECTIONS (25 rows) ====================
 INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6001, 'Swim', 7001);
 INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6001, 'Art', 7002);
 INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6002, 'Art', 7002);
