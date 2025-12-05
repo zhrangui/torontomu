@@ -1,175 +1,3 @@
--- ==================== DROP ALL TABLES ====================
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE Collection';
-EXCEPTION WHEN OTHERS THEN NULL;
-END;
-/
-
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE Registration';
-EXCEPTION WHEN OTHERS THEN NULL;
-END;
-/
-
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE Event';
-EXCEPTION WHEN OTHERS THEN NULL;
-END;
-/
-
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE Equipment';
-EXCEPTION WHEN OTHERS THEN NULL;
-END;
-/
-
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE Camper';
-EXCEPTION WHEN OTHERS THEN NULL;
-END;
-/
-
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE Activity';
-EXCEPTION WHEN OTHERS THEN NULL;
-END;
-/
-
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE Counsellor';
-EXCEPTION WHEN OTHERS THEN NULL;
-END;
-/
-
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE Badge';
-EXCEPTION WHEN OTHERS THEN NULL;
-END;
-/
-
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE Guardian';
-EXCEPTION WHEN OTHERS THEN NULL;
-END;
-/
-
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE Locations';
-EXCEPTION WHEN OTHERS THEN NULL;
-END;
-/
-
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE Address';
-EXCEPTION WHEN OTHERS THEN NULL;
-END;
-/
-
--- ==================== CREATE TABLES ====================
-CREATE TABLE Address (
-    addr_ID NUMBER(10),
-    st_no VARCHAR2(50) NOT NULL,
-    st_name VARCHAR2(30) NOT NULL,
-    city VARCHAR2(30),
-    province VARCHAR2(30),
-    postal_code VARCHAR2(10),
-    CONSTRAINT address_pk PRIMARY KEY (addr_ID)
-);
-
-CREATE TABLE Locations (
-    location_ID NUMBER(10),
-    location_name VARCHAR2(30) NOT NULL,
-    CONSTRAINT location_pk PRIMARY KEY (location_ID)
-);
-
-CREATE TABLE Guardian (
-    gu_ID NUMBER(10),
-    gu_fname VARCHAR2(20) NOT NULL,
-    gu_lname VARCHAR2(20) NOT NULL,
-    gu_phone VARCHAR2(15) NOT NULL,
-    drivers_license VARCHAR2(20),
-    CONSTRAINT guardians_pk PRIMARY KEY (gu_ID)
-);
-
-CREATE TABLE Counsellor (
-    co_ID NUMBER(10),
-    co_fname VARCHAR2(20) NOT NULL,
-    co_lname VARCHAR2(20) NOT NULL,
-    address_ID NUMBER(10) NOT NULL,
-    CONSTRAINT counsellors_pk PRIMARY KEY (co_ID),
-    CONSTRAINT counsellors_address_fk FOREIGN KEY (address_ID) REFERENCES Address(addr_ID)
-);
-
-CREATE TABLE Badge (
-    badge_name VARCHAR2(20),
-    badge_description VARCHAR2(100),
-    CONSTRAINT badge_pk PRIMARY KEY (badge_name)
-);
-
-CREATE TABLE Activity (
-    activity_ID NUMBER(10),
-    activity_name VARCHAR2(30) NOT NULL,
-    age_requirement VARCHAR2(20),
-    participant_limit NUMBER(3),
-    badge_name VARCHAR2(20),
-    CONSTRAINT activity_pk PRIMARY KEY (activity_ID),
-    CONSTRAINT activity_badge_name_fk FOREIGN KEY (badge_name) REFERENCES Badge(badge_name)
-);
-
-CREATE TABLE Equipment (
-    item_name NUMBER(10),
-    activity_ID NUMBER(10),
-    quantity NUMBER(5) NOT NULL,
-    weight_per_unit NUMBER(7,2),
-    safety_warning VARCHAR2(100),
-    consumable NUMBER(1),
-    CONSTRAINT equipment_pk PRIMARY KEY (item_name, activity_ID),
-    CONSTRAINT equipment_activity_fk FOREIGN KEY (activity_ID) REFERENCES Activity(activity_ID)
-);
-
-CREATE TABLE Camper (
-    cam_ID NUMBER(10),
-    cam_fname VARCHAR2(20) NOT NULL,
-    cam_lname VARCHAR2(20) NOT NULL,
-    address_ID NUMBER(10) NOT NULL,
-    cam_age NUMBER(3) NOT NULL,
-    gu_ID NUMBER(10) NOT NULL,
-    CONSTRAINT campers_pk PRIMARY KEY (cam_ID),
-    CONSTRAINT campers_address_fk FOREIGN KEY (address_ID) REFERENCES Address(addr_ID),
-    CONSTRAINT campers_gu_fk FOREIGN KEY (gu_ID) REFERENCES Guardian(gu_ID)
-);
-
-CREATE TABLE Event (
-    event_ID NUMBER(10),
-    co_ID NUMBER(10) NOT NULL,
-    activity_ID NUMBER(10) NOT NULL,
-    location_ID NUMBER(10) NOT NULL,
-    event_date DATE NOT NULL,
-    start_time TIMESTAMP NOT NULL,
-    duration INTERVAL DAY TO SECOND NOT NULL,
-    CONSTRAINT events_pk PRIMARY KEY (event_ID),
-    CONSTRAINT events_co_fk FOREIGN KEY (co_ID) REFERENCES Counsellor(co_ID),
-    CONSTRAINT events_activity_fk FOREIGN KEY (activity_ID) REFERENCES Activity(activity_ID),
-    CONSTRAINT events_location_fk FOREIGN KEY (location_ID) REFERENCES Locations(location_ID)
-);
-
-CREATE TABLE Registration (
-    cam_ID NUMBER(10) NOT NULL,
-    event_ID NUMBER(10) NOT NULL,
-    CONSTRAINT registration_pk PRIMARY KEY (cam_ID, event_ID),
-    CONSTRAINT registration_cam_fk FOREIGN KEY (cam_ID) REFERENCES Camper(cam_ID),
-    CONSTRAINT registration_event_fk FOREIGN KEY (event_ID) REFERENCES Event(event_ID)
-);
-
-CREATE TABLE Collection (
-    cam_ID NUMBER(10),
-    badge_name VARCHAR2(20),
-    event_ID NUMBER(10),
-    CONSTRAINT collection_pk PRIMARY KEY (cam_ID, badge_name),
-    CONSTRAINT collection_cam_fk FOREIGN KEY (cam_ID) REFERENCES Camper(cam_ID),
-    CONSTRAINT collection_badge_fk FOREIGN KEY (badge_name) REFERENCES Badge(badge_name),
-    CONSTRAINT collection_event_fk FOREIGN KEY (event_ID) REFERENCES Event(event_ID)
-);
 
 -- ==================== ADDRESS (12 rows) ====================
 INSERT INTO Address (addr_ID, st_no, st_name, city, province, postal_code) VALUES (1001, '123', 'Maple Ave', 'Toronto', 'ON', 'M1A1A1');
@@ -265,10 +93,10 @@ INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VA
 INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6006, 'Emma', 'Chen', 1006, 7, 3006);
 INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6007, 'Jacob', 'Patel', 1007, 10, 3007);
 INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6008, 'Olivia', 'Anderson', 1008, 13, 3008);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6009, 'Mason', 'Taylor', 1009, 8, 3009);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6010, 'Isabella', 'Martinez', 1010, 11, 3010);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6011, 'Ethan', 'Wilson', 1011, 9, 3011);
-INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6012, 'Ava', 'Brown', 1012, 10, 3012);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6009, 'Mason', 'Taylor', 1011, 8, 3009);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6010, 'Isabella', 'Martinez', 1006, 11, 3010);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6011, 'Ethan', 'Wilson', 1009, 9, 3011);
+INSERT INTO Camper (cam_ID, cam_fname, cam_lname, address_ID, cam_age, gu_ID) VALUES (6012, 'Ava', 'Brown', 1001, 10, 3012);
 
 -- ==================== EVENTS (12 rows) ====================
 INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7001, 5001, 4001, 2001, DATE '2025-07-01', TIMESTAMP '2025-07-01 09:00:00', INTERVAL '0 01:30:00' DAY TO SECOND);
@@ -284,19 +112,26 @@ INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_
 INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7011, 5007, 4011, 2011, DATE '2025-07-10', TIMESTAMP '2025-07-10 14:00:00', INTERVAL '0 03:00:00' DAY TO SECOND);
 INSERT INTO Event (event_ID, co_ID, activity_ID, location_ID, event_date, start_time, duration) VALUES (7012, 5007, 4010, 2010, DATE '2025-07-11', TIMESTAMP '2025-07-11 09:00:00', INTERVAL '0 02:30:00' DAY TO SECOND);
 
--- ==================== EQUIPMENT (12 rows) ====================
-INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES (8001, 4001, 30, 1.50, 'Ensure proper fit', 0);
-INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES (8002, 4002, 20, 0.75, 'Keep away from eyes', 1);
-INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES (8003, 4003, 15, 2.50, 'Adjust straps before use', 0);
-INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES (8004, 4004, 25, 0.45, 'Use shin guards', 1);
-INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES (8005, 4005, 20, 0.62, 'Check inflation regularly', 0);
-INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES (8006, 4006, 16, 0.35, 'String tension critical', 0);
-INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES (8007, 4007, 12, 0.50, 'Never point at people', 0);
-INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES (8008, 4008, 18, 0.30, 'No external jewelry', 0);
-INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES (8009, 4009, 14, 5.00, 'Use proper technique', 0);
-INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES (8010, 4010, 15, 0.80, 'Follow protocol', 1);
-INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES (8011, 4011, 10, 3.50, 'Use harness', 0);
-INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES (8012, 4012, 22, 0.65, 'Wear protective gear', 1);
+-- ==================== EQUIPMENT (19 rows) ====================
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Swim Life Jackets', 4001, 30, 1.50, 'Ensure proper fit', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Swim Goggles', 4001, 30, 1.50, 'Tighten straps to fit', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Paint Brushes', 4002, 50, 0.75, 'Clean after use', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Acrylic Paint', 4002, 10, 3, 'Seal after use', 1);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Craft Paper', 4002, 30, 3, 'Pre-cut sheets', 1);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Hiking First Aid', 4003, 1, 10, 'Check supplies before hike', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Soccer Shin Pads', 4004, 30, 3, 'Should cover entire shin', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Soccer Ball', 4004, 10, 3, 'Check inflation regularly', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Basketballs', 4005, 10, 5, 'Check inflation regularly', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Tennis Balls', 4006, 30, 0.35, 'Collect all after use', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Tennis Rackets', 4006, 30, 0.35, 'Put in sleeves after use', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Archery Bows', 4007, 10, 4, 'Never point at people', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Archery Arrows', 4007, 50, 4, '3 per archery station', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Bluetooth Speaker', 4008, 1, 15, 'Charge after use', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Musical Instruments', 4009, 30, 4.0, 'Clean instruments thoroughly', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Chemistry Kits', 4010, 30, 30, 'Safely dispose of chemicals', 1);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Harnesses', 4011, 20, 15, 'Tighten straps before use', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Climbing Ropes', 4011, 40, 15, 'Triple check that ropes are secure', 0);
+INSERT INTO Equipment (item_name, activity_ID, quantity, weight_per_unit, safety_warning, consumable) VALUES ('Volleyballs', 4012, 10, 3, 'Check inflation regularly', 0);
 
 -- ==================== REGISTRATIONS (36 rows) ====================
 -- Event 7001 (Swimming Lessons) - Multiple campers
@@ -355,11 +190,11 @@ INSERT INTO Registration (cam_ID, event_ID) VALUES (6010, 7010);
 -- Event 7011 (Rock Climbing) - Multiple campers
 INSERT INTO Registration (cam_ID, event_ID) VALUES (6008, 7011);
 INSERT INTO Registration (cam_ID, event_ID) VALUES (6011, 7011);
+INSERT INTO Registration (cam_ID, event_ID) VALUES (6010, 7011);
 
 -- Event 7012 (Science Lab) - Multiple campers
 INSERT INTO Registration (cam_ID, event_ID) VALUES (6002, 7012);
 INSERT INTO Registration (cam_ID, event_ID) VALUES (6004, 7012);
-INSERT INTO Registration (cam_ID, event_ID) VALUES (6010, 7011); -- Rock climbing event
 
 -- ==================== COLLECTIONS (20 rows) ====================
 INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6001, 'Swim', 7002);
@@ -382,3 +217,5 @@ INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6008, 'Climbing', 
 INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6011, 'Climbing', 7011);
 INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6010, 'Climbing', 7011);
 INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6007, 'Swim', 7003);
+INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6007, 'Leadership', NULL);
+INSERT INTO Collection (cam_ID, badge_name, event_ID) VALUES (6007, 'Friendship', NULL);
