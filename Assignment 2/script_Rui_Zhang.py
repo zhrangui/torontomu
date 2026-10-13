@@ -108,12 +108,17 @@ Two different examples of this approach are the One-vs-Rest and One-vs-One strat
 
 # Explain below how the One-vs-Rest method works for multi-class classification # 12 points
 """
-Your explanation goes here
+For a problem with K classes, One-vs-Rest trains K binary classifiers. Each classifier treats one class as the positive class and combines all other classes into a single negative class.
+To classify a new instance, all K classifiers produce a score or probability, and the instance is assigned to the class with the highest score.
+This approach is simple and requires only one classifier per class, but the independently trained classifiers can produce scores that are difficult to compare, and the data may be imbalanced when one class is compared with all the others.
 """
 
 # Explain below how the One-Vs-One method works for multi-class classification # 11 points
 """
-Your explanation goes here
+For a problem with K classes, One-vs-One trains a separate binary classifier for every pair of classes, for a total of K(K-1)/2 classifiers.
+Each classifier is trained using only the examples from its two classes. To classify a new instance, each classifier predicts one of its two classes and gives that class a vote.
+The class with the most votes is selected; a tie can be resolved using the classifiers' confidence scores or another tie-breaking rule.
+Each model sees fewer classes, but this strategy requires more classifiers as the number of classes grows.
 """
 
 
