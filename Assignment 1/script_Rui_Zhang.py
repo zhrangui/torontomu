@@ -72,8 +72,8 @@ plt.ylabel('Classifier Accuracy') # name the vertical axis 'Classifier Accuracy'
 
 # Fill out the following blanks: #(4 points (2 points per blank)) 
 """ 
-According to the test accuracy, the best model has a maximum depth of approximately 3, 5, 10, 11, or 13, which tie for the highest test accuracy. 
-However, we should not use the test data to select hyperparameters because doing so can overfit to the test set and lead to an overly optimistic estimate of the model's performance.
+According to the test accuracy, the best model to select is when the maximum depth is equal to 3, approximately. 
+But, we should not use select the hyperparameters of our model using the test data, because doing so can overfit to the test set and lead to an overly optimistic estimate of the model's performance.
 """
 # %%
 ### PART 2.2 ###
@@ -104,4 +104,3 @@ Limiting depth controls model complexity, and requiring at least eight samples a
 Split the training dataset into 10 folds, and for each fold, train the model on the other 9 folds and validate it on the current fold. This process is repeated for all 10 folds, and the results are averaged to provide a more robust estimate of model performance.
 Stratified cross-validation ensures that each fold has approximately the same percentage of samples of each target class as the complete set, which is particularly important for imbalanced datasets.
 """
-
